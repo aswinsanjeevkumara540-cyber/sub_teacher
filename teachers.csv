@@ -1,0 +1,10 @@
+teacher_id,name,subject,department,experience,phone,email,status,workload,rating
+T001,Dr. Sarah Johnson,Mathematics,Science,8,987650001,sarah@school.edu,Available,6,4.8
+T002,Mr. Raj Kumar,Physics,Science,12,987650002,raj@school.edu,Busy,8,4.9
+T003,Ms. Emily Chen,English,Languages,5,987650003,emily@school.edu,Available,4,4.6
+T004,Mr. David Wilson,Chemistry,Science,10,987650004,david@school.edu,On Leave,7,4.7
+T005,Ms. Priya Sharma,History,Humanities,6,987650005,priya@school.edu,Available,3,4.5
+T006,Mr. Alex Thompson,Computer Science,Technology,4,987650006,alex@school.edu,Available,5,4.4
+T007,Ms. Linda Garcia,Biology,Science,9,987650007,linda@school.edu,Available,6,4.6
+T008,Mr. Michael Lee,Physical Education,Sports,15,987650008,michael@school.edu,Available,7,4.8
+

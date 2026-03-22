@@ -1,0 +1,22 @@
+student_id,name,class,section,gender,dob,phone,email,address,attendance
+S001,Arun Kumar,10,A,M,2009-05-12,9876543210,arun10a@gmail.com,Erode,92
+S002,Divya Iyer,10,A,F,2009-07-21,9876543211,divya10a@gmail.com,Erode,88
+S003,Rohit Singh,10,B,M,2008-11-02,9876543212,rohit10b@gmail.com,Erode,76
+S004,Kavya Nair,10,B,F,2009-03-15,9876543213,kavya10b@gmail.com,Erode,95
+S005,Sanjay Verma,11,A,M,2008-06-30,9876543214,sanjay11a@gmail.com,Erode,81
+S006,Neha Gupta,11,A,F,2008-09-10,9876543215,neha11a@gmail.com,Erode,89
+S007,Pooja Malhotra,11,B,F,2008-01-25,9876543216,pooja11b@gmail.com,Erode,93
+S008,James Brown,11,B,M,2007-12-18,9876543217,james11b@gmail.com,Erode,85
+S009,Ananya Sharma,12,A,F,2007-04-05,9876543218,ananya12a@gmail.com,Erode,88
+S010,Aditya Rao,12,A,M,2007-08-22,9876543219,aditya12a@gmail.com,Erode,90
+S011,Meera Joshi,12,B,F,2007-02-14,9876543220,meera12b@gmail.com,Erode,87
+S012,Arjun Patel,12,B,M,2006-10-30,9876543221,arjun12b@gmail.com,Erode,84
+S013,Anjali Desai,10,A,F,2009-05-12,9876543222,anjali10a@gmail.com,Erode,86 
+S014,Ramesh Nambiar,10,B,M,2008-11-02,9876543223,ramesh10b@gmail.com,Erode,82   
+S015,Meera Chopra,11,A,F,2008-01-25,9876543224,meera11a@gmail.com,Erode,88
+S016,Suresh Patel,11,B,M,2008-06-30,9876543225,suresh11b@gmail.com,Erode,86
+S017,Kavita Rao,12,A,F,2007-09-10,9876543226,kavita12a@gmail.com,Erode,85
+S018,Arvind Kumar,12,B,M,2006-10-30,9876543227,arvind12b@gmail.com,Erode,84
+S019,Priya Singh,10,A,F,2009-03-15,9876543228,priya10a@gmail.com,Erode,88
+S020,Vijay Malhotra,10,B,M,2008-01-25,9876543229,vijay10b@gmail.com,Erode,86
+S021,Sunita Verma,11,A,F,2008-06-30,9876543230,sunita11a@gmail.com,Erode,88

@@ -1,0 +1,42 @@
+{
+  "teacherCount": 40,
+  "studentCount": 105,
+  "timetableCount": 40,
+  "firstTimetableEntry": {
+    "_id": "69be3517e4698afbe4f18984",
+    "day": "Friday",
+    "p": 1,
+    "t": "08:30",
+    "data": {
+      "10-A": {
+        "s": "PE",
+        "tc": "Manoj Reddy"
+      },
+      "10-B": {
+        "s": "Chemistry",
+        "tc": "Mr. David Wilson"
+      },
+      "11-A": {
+        "s": "Physics",
+        "tc": "Mr. Raj Kumar"
+      },
+      "11-B": {
+        "s": "Chemistry",
+        "tc": "Mr. David Wilson"
+      },
+      "9-A": {
+        "s": "Chemistry",
+        "tc": "Mr. David Wilson"
+      },
+      "9-B": {
+        "s": "Geography",
+        "tc": "Mr. Ashok Reddy"
+      },
+      "9-C": {
+        "s": "Art",
+        "tc": "Ms. Divya Iyer"
+      }
+    },
+    "__v": 0
+  }
+}

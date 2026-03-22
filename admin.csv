@@ -1,0 +1,6 @@
+admin_id,name,role,phone,email,username,password
+A001,Administrator,System Admin,987652222,admin@school.edu,admin,admin123
+A002,Super Admin,Head Admin,987652223,superadmin@school.edu,superadmin,admin456
+
+
+

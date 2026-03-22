@@ -1,0 +1,3491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>EduAI Pro v2 — Smart School Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #a78bfa;
+      border-radius: 99px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    :root {
+      --p: #7c3aed;
+      --p2: #6d28d9;
+      --pl: #ede9fe;
+      --b: #0891b2;
+      --bl: #e0f2fe;
+      --g: #059669;
+      --gl: #d1fae5;
+      --r: #e11d48;
+      --rl: #ffe4e6;
+      --a: #d97706;
+      --al: #fef3c7;
+      --i: #4f46e5;
+      --nv: #1e1b4b;
+      --nv2: #312e81;
+      --gr: #64748b;
+      --grl: #f1f5f9;
+      --gb: #e2e8f0;
+      --tx: #1e293b;
+      --sw: 252px
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(.9)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    @keyframes dotB {
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0)
+      }
+
+      30% {
+        transform: translateY(-6px)
+      }
+    }
+
+    @keyframes glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(124, 58, 237, .3)
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(124, 58, 237, .6)
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-8px)
+      }
+    }
+
+    .fu {
+      animation: fadeUp .35s ease forwards
+    }
+
+    .fi {
+      animation: fadeIn .3s ease forwards
+    }
+
+    .si {
+      animation: scaleIn .3s cubic-bezier(.34, 1.56, .64, 1) forwards
+    }
+
+    .d1 {
+      animation: dotB 1.2s 0s infinite
+    }
+
+    .d2 {
+      animation: dotB 1.2s .18s infinite
+    }
+
+    .d3 {
+      animation: dotB 1.2s .36s infinite
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: 'Plus Jakarta Sans', sans-serif
+    }
+
+    button {
+      cursor: pointer;
+      transition: all .2s
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid var(--p);
+      outline-offset: 1px
+    }
+
+    /* LOGIN */
+    #loginScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden
+    }
+
+    .lbg {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .08
+    }
+
+    .lcard {
+      background: rgba(255, 255, 255, .06);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 28px;
+      padding: 42px 38px;
+      width: 460px;
+      max-width: 94vw;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, .45);
+      position: relative;
+      z-index: 2;
+      animation: scaleIn .5s cubic-bezier(.34, 1.56, .64, 1)
+    }
+
+    .llogo {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #7c3aed, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      margin: 0 auto 18px;
+      animation: glow 3s ease-in-out infinite
+    }
+
+    .ltitle {
+      color: white;
+      font-size: 26px;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 4px
+    }
+
+    .lsub {
+      color: rgba(255, 255, 255, .5);
+      font-size: 13px;
+      text-align: center;
+      margin-bottom: 28px
+    }
+
+    .llbl {
+      display: block;
+      font-size: 11px;
+      color: rgba(255, 255, 255, .55);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 6px
+    }
+
+    .linput {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(255, 255, 255, .15);
+      background: rgba(255, 255, 255, .08);
+      color: white;
+      font-size: 14px;
+      margin-bottom: 14px
+    }
+
+    .linput::placeholder {
+      color: rgba(255, 255, 255, .33)
+    }
+
+    .linput:focus {
+      border-color: #a78bfa;
+      background: rgba(255, 255, 255, .12);
+      outline: none
+    }
+
+    .lroles {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 20px
+    }
+
+    .lrole {
+      padding: 12px 8px;
+      border-radius: 12px;
+      border: 2px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .05);
+      color: rgba(255, 255, 255, .6);
+      cursor: pointer;
+      text-align: center;
+      transition: all .25s
+    }
+
+    .lrole.active {
+      border-color: #a78bfa;
+      background: rgba(124, 58, 237, .3);
+      color: white
+    }
+
+    .lrole .ri {
+      font-size: 22px;
+      display: block;
+      margin-bottom: 4px
+    }
+
+    .lrole .rn {
+      font-size: 11px;
+      font-weight: 700
+    }
+
+    .lbtn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7c3aed, #6366f1);
+      color: white;
+      border: none;
+      font-weight: 900;
+      font-size: 15px;
+      box-shadow: 0 8px 28px rgba(124, 58, 237, .5)
+    }
+
+    .lbtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(124, 58, 237, .6)
+    }
+
+    .lcreds {
+      margin-top: 16px;
+      padding: 11px 14px;
+      background: rgba(255, 255, 255, .05);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, .1)
+    }
+
+    .lcreds p {
+      color: rgba(255, 255, 255, .45);
+      font-size: 11px;
+      line-height: 1.8
+    }
+
+    /* API BANNER */
+    #apiBanner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 8000;
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      padding: 11px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .3)
+    }
+
+    #apiBanner.hidden {
+      display: none
+    }
+
+    #apiIn {
+      flex: 1;
+      min-width: 200px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255, 255, 255, .2);
+      background: rgba(255, 255, 255, .1);
+      color: white;
+      font-size: 12px
+    }
+
+    #apiIn::placeholder {
+      color: rgba(255, 255, 255, .4)
+    }
+
+    .asave {
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #7c3aed, #6366f1);
+      color: white;
+      border: none;
+      font-weight: 800;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap
+    }
+
+    .alink {
+      color: #a78bfa;
+      font-size: 11px;
+      text-decoration: none;
+      cursor: pointer
+    }
+
+    .alink:hover {
+      color: #c4b5fd
+    }
+
+    /* APP SHELL */
+    #shell {
+      display: flex;
+      height: 100vh;
+      overflow: hidden
+    }
+
+    /* SIDEBAR */
+    #sb {
+      width: var(--sw);
+      min-width: var(--sw);
+      background: linear-gradient(180deg, var(--nv) 0%, var(--nv2) 60%, #1e3a5f 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      transition: width .3s, min-width .3s;
+      overflow: hidden;
+      box-shadow: 4px 0 24px rgba(0, 0, 0, .2);
+      z-index: 20
+    }
+
+    #sb.col {
+      width: 64px;
+      min-width: 64px
+    }
+
+    .sblogo {
+      padding: 18px 14px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .slic {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7c3aed, #06b6d4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 16px rgba(124, 58, 237, .35)
+    }
+
+    .sltxt {
+      font-weight: 900;
+      font-size: 15px;
+      white-space: nowrap
+    }
+
+    .slsub {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-top: 1px
+    }
+
+    .sbusr {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .sbav {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      color: white
+    }
+
+    .sbname {
+      font-weight: 700;
+      font-size: 13px;
+      white-space: nowrap
+    }
+
+    .sbrole {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-top: 1px
+    }
+
+    nav {
+      flex: 1;
+      padding: 6px 0;
+      overflow-y: auto
+    }
+
+    .nb {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: transparent;
+      border: none;
+      border-left: 3px solid transparent;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap;
+      position: relative
+    }
+
+    .nb.on {
+      background: rgba(255, 255, 255, .12);
+      border-left-color: #a78bfa;
+      color: white;
+      font-weight: 700
+    }
+
+    .nb:hover:not(.on) {
+      background: rgba(255, 255, 255, .06);
+      color: #e2e8f0
+    }
+
+    .nic {
+      font-size: 18px;
+      min-width: 22px;
+      text-align: center
+    }
+
+    .nlbl {
+      font-size: 13px;
+      font-weight: 500
+    }
+
+    .nbdg {
+      background: #e11d48;
+      color: white;
+      border-radius: 99px;
+      padding: 1px 7px;
+      font-size: 10px;
+      font-weight: 800;
+      margin-left: auto
+    }
+
+    .sbft {
+      padding: 10px 14px;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .lout {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap
+    }
+
+    .lout:hover {
+      background: rgba(255, 255, 255, .12);
+      color: white
+    }
+
+    .stog {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .06);
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px
+    }
+
+    .stog:hover {
+      background: rgba(255, 255, 255, .12);
+      color: white
+    }
+
+    /* MAIN */
+    #main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-width: 0
+    }
+
+    #topbar {
+      padding: 12px 24px;
+      background: white;
+      border-bottom: 1px solid var(--gb);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+      z-index: 10;
+      flex-shrink: 0
+    }
+
+    #ttl {
+      font-weight: 900;
+      font-size: 19px;
+      color: var(--tx)
+    }
+
+    #tsub {
+      color: #94a3b8;
+      font-size: 11px;
+      margin-top: 1px
+    }
+
+    #rbdg {
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .nbtn {
+      position: relative;
+      background: transparent;
+      border: 1px solid var(--gb);
+      border-radius: 10px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      transition: all .2s
+    }
+
+    .nbtn:hover {
+      background: #f8f7ff;
+      border-color: #a78bfa
+    }
+
+    .nred {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e11d48;
+      border: 2px solid white;
+      display: none
+    }
+
+    .mmbtn {
+      background: transparent;
+      border: 1px solid var(--gb);
+      border-radius: 10px;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-size: 18px;
+      display: none;
+      align-items: center;
+      justify-content: center
+    }
+
+    #content {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 22px
+    }
+
+    /* CARDS */
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+      transition: box-shadow .2s
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .09)
+    }
+
+    .ct {
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--tx);
+      margin-bottom: 14px
+    }
+
+    .g2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px
+    }
+
+    .g3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px
+    }
+
+    .fb {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px
+    }
+
+    .scard {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      border-top: 4px solid transparent;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+      transition: all .25s
+    }
+
+    .scard:hover {
+      transform: translateY(-3px)
+    }
+
+    .avatar {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0
+    }
+
+    .badge {
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap
+    }
+
+    .prog {
+      height: 6px;
+      background: #f1f5f9;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 3px
+    }
+
+    .pf {
+      height: 100%;
+      border-radius: 99px;
+      transition: width .5s
+    }
+
+    .btn {
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all .2s
+    }
+
+    .bp {
+      background: linear-gradient(135deg, #7c3aed, #6366f1);
+      color: white;
+      box-shadow: 0 4px 14px rgba(124, 58, 237, .25)
+    }
+
+    .bp:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, .4)
+    }
+
+    .bs {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white
+    }
+
+    .bs:hover {
+      transform: translateY(-1px)
+    }
+
+    .bd {
+      background: linear-gradient(135deg, #e11d48, #f43f5e);
+      color: white
+    }
+
+    .bg {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid var(--gb)
+    }
+
+    .bg:hover {
+      background: #e2e8f0
+    }
+
+    .bai {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, .25)
+    }
+
+    .bai:hover {
+      transform: translateY(-1px)
+    }
+
+    .btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important
+    }
+
+    .fi2 {
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 9px;
+      border: 1.5px solid var(--gb);
+      font-size: 13px;
+      background: white;
+      color: var(--tx);
+      transition: border-color .2s
+    }
+
+    .fi2:focus {
+      border-color: var(--p)
+    }
+
+    .fl {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px
+    }
+
+    .fg {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px
+    }
+
+    /* TEACHER CARDS */
+    .tgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+      gap: 14px
+    }
+
+    .tcard {
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+      border: 1.5px solid transparent;
+      transition: all .22s
+    }
+
+    .tcard:hover {
+      border-color: rgba(124, 58, 237, .25);
+      box-shadow: 0 6px 28px rgba(124, 58, 237, .1);
+      transform: translateY(-2px)
+    }
+
+    .asel {
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer
+    }
+
+    /* ABSENCE CARDS */
+    .acard {
+      background: white;
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
+      border-left: 5px solid transparent;
+      margin-bottom: 12px;
+      transition: box-shadow .2s
+    }
+
+    .acard:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .1)
+    }
+
+    .aibox {
+      margin-top: 14px;
+      padding: 16px;
+      background: #f8f7ff;
+      border-radius: 12px;
+      border: 1.5px solid rgba(124, 58, 237, .2)
+    }
+
+    /* TIMETABLE */
+    .tta {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px
+    }
+
+    .tta th {
+      padding: 12px 14px;
+      color: white;
+      font-weight: 800;
+      font-size: 12px;
+      text-align: left
+    }
+
+    .tta td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f1f5f9
+    }
+
+    .ttc {
+      padding: 7px 10px;
+      border-radius: 9px;
+      border-left: 3px solid transparent
+    }
+
+    .ttc .ts {
+      font-weight: 700;
+      font-size: 12px
+    }
+
+    .ttc .tt2 {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 1px
+    }
+
+    .dtab {
+      padding: 7px 18px;
+      border-radius: 99px;
+      border: 2px solid var(--gb);
+      background: white;
+      color: #64748b;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .2s
+    }
+
+    .dtab.on {
+      border-color: #7c3aed;
+      background: #7c3aed;
+      color: white
+    }
+
+    .dtab:hover:not(.on) {
+      border-color: #a78bfa;
+      color: #7c3aed
+    }
+
+    .cbar {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 150px;
+      padding: 0 4px
+    }
+
+    .cg {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      flex: 1
+    }
+
+    .cb {
+      border-radius: 5px 5px 0 0;
+      width: 100%;
+      transition: height .6s .1s
+    }
+
+    .cb:hover {
+      filter: brightness(1.14)
+    }
+
+    .clbl {
+      font-size: 10px;
+      color: #94a3b8;
+      font-weight: 600
+    }
+
+    .msg {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px
+    }
+
+    .msg.u {
+      flex-direction: row-reverse
+    }
+
+    .mav {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0
+    }
+
+    .mbub {
+      max-width: 74%;
+      padding: 11px 15px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-word
+    }
+
+    .msg.b .mbub {
+      background: white;
+      color: var(--tx);
+      border-bottom-left-radius: 3px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .07)
+    }
+
+    .msg.u .mbub {
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: white;
+      border-bottom-right-radius: 3px
+    }
+
+    .chip {
+      padding: 5px 13px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #f1f5f9;
+      border: 1.5px solid var(--gb);
+      color: #64748b;
+      cursor: pointer;
+      transition: all .2s
+    }
+
+    .chip:hover {
+      background: #7c3aed;
+      color: white;
+      border-color: #7c3aed
+    }
+
+    .ni {
+      padding: 13px 16px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .04);
+      border-left: 4px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all .2s;
+      margin-bottom: 9px
+    }
+
+    .ni:hover {
+      box-shadow: 0 3px 16px rgba(0, 0, 0, .1);
+      transform: translateX(3px)
+    }
+
+    .ndot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .ssr {
+      padding: 22px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+      margin-bottom: 16px
+    }
+
+    .st {
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--tx);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--gb)
+    }
+
+    .sr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f8fafc
+    }
+
+    .sr:last-child {
+      border-bottom: none
+    }
+
+    .tog {
+      width: 44px;
+      height: 24px;
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: background .3s;
+      flex-shrink: 0
+    }
+
+    .tog.on {
+      background: #7c3aed
+    }
+
+    .tog.off {
+      background: #d1d5db
+    }
+
+    .tog::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+      top: 3px;
+      transition: left .3s;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .2)
+    }
+
+    .tog.on::after {
+      left: 23px
+    }
+
+    .tog.off::after {
+      left: 3px
+    }
+
+    .ib {
+      background: linear-gradient(135deg, #1e1b4b, #1e3a5f);
+      border-radius: 16px;
+      padding: 22px;
+      color: white;
+      margin-top: 16px
+    }
+
+    .ig {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 10px;
+      margin-top: 14px
+    }
+
+    .ic {
+      padding: 14px 15px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .1);
+      transition: all .2s
+    }
+
+    .ic:hover {
+      background: rgba(255, 255, 255, .12);
+      transform: translateY(-2px)
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      color: white;
+      font-weight: 700;
+      font-size: 13px;
+      z-index: 99999;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .2);
+      animation: fadeUp .3s ease;
+      pointer-events: none
+    }
+
+    .stitle {
+      font-weight: 900;
+      font-size: 20px;
+      color: var(--tx);
+      margin-bottom: 4px
+    }
+
+    .ssub {
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 18px
+    }
+
+    /* AVAILABILITY */
+    .apanel {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .06)
+    }
+
+    .aph {
+      padding: 14px 18px;
+      background: linear-gradient(135deg, #1e1b4b, #3730a3);
+      color: white;
+      font-weight: 800;
+      font-size: 14px
+    }
+
+    .apr {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      border-bottom: 1px solid #f8fafc;
+      transition: background .2s;
+      flex-wrap: wrap
+    }
+
+    .apr:hover {
+      background: #f8f7ff
+    }
+
+    .apr:last-child {
+      border-bottom: none
+    }
+
+    @media(max-width:768px) {
+
+      .g2,
+      .g3 {
+        grid-template-columns: 1fr
+      }
+
+      #sb {
+        position: fixed;
+        height: 100%;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform .3s, width .3s
+      }
+
+      #sb.mopen {
+        transform: translateX(0)
+      }
+
+      .mmbtn {
+        display: flex !important
+      }
+
+      #content {
+        padding: 14px
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .tgrid {
+        grid-template-columns: 1fr
+      }
+
+      .fg {
+        grid-template-columns: 1fr
+      }
+
+      #topbar {
+        padding: 10px 14px
+      }
+
+      #ttl {
+        font-size: 16px
+      }
+
+      .apr {
+        gap: 8px
+      }
+    }
+
+    @media(max-width:480px) {
+      .stat-grid {
+        grid-template-columns: 1fr
+      }
+
+      .lcard {
+        padding: 28px 18px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGIN -->
+  <div id="loginScreen">
+    <div class="lbg" style="width:600px;height:600px;background:#7c3aed;top:-200px;left:-200px"></div>
+    <div class="lbg" style="width:400px;height:400px;background:#06b6d4;bottom:-100px;right:-100px"></div>
+    <div class="lcard">
+      <div class="llogo" style="animation:float 3s ease-in-out infinite">🏫</div>
+      <div class="ltitle">EduAI Pro</div>
+      <div class="lsub">Smart AI-Powered School Management System v2</div>
+      <label class="llbl">Select Your Role</label>
+      <div class="lroles" id="lRoles">
+        <div class="lrole active" onclick="pickRole('admin',this)"><span class="ri">👑</span><span
+            class="rn">Admin</span></div>
+        <div class="lrole" onclick="pickRole('coordinator',this)"><span class="ri">🎯</span><span
+            class="rn">Coordinator</span></div>
+        <div class="lrole" onclick="pickRole('teacher',this)"><span class="ri">👩‍🏫</span><span
+            class="rn">Teacher</span></div>
+      </div>
+      <label class="llbl">Username</label>
+      <input class="linput" id="lUser" placeholder="Enter username" value="admin" />
+      <label class="llbl">Password</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input class="linput" id="lPass" type="password" placeholder="Enter password" value="admin123"
+          onkeydown="if(event.key==='Enter')login()" style="flex:1" />
+        <button
+          style="background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.2);border-radius:10px;padding:8px 12px;color:rgba(255,255,255,.7);cursor:pointer;font-size:16px;height:44px;display:flex;align-items:center;justify-content:center;min-width:44px;transition:all .2s"
+          onclick="togglePass('lPass')" title="Show/Hide password">👁</button>
+      </div>
+      <button class="lbtn" onclick="login()">🚀 Sign In to EduAI Pro</button>
+      <div id="lErr"
+        style="color:#f87171;font-size:12px;font-weight:700;text-align:center;margin-top:10px;display:none"></div>
+      <div class="lcreds">
+        <!--     <p>Demo: Admin → admin / admin123 &nbsp;·&nbsp; Coordinator → coord / coord123 &nbsp;·&nbsp; Teacher → teacher /
+          teach123 &nbsp;·&nbsp; Admin can create new users & manage passwords in Settings</p> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- API MODAL OVERLAY -->
+  <div id="apiModal"
+    style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);align-items:center;justify-content:center">
+    <div
+      style="background:linear-gradient(160deg,#1e1b4b,#1e3a5f);border-radius:24px;padding:32px 28px;width:520px;max-width:95vw;box-shadow:0 32px 80px rgba(0,0,0,.5);position:relative;animation:scaleIn .3s cubic-bezier(.34,1.56,.64,1)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
+        <div>
+          <div style="color:white;font-size:19px;font-weight:900">🔑 AI API Settings</div>
+          <div style="color:rgba(255,255,255,.45);font-size:12px;margin-top:3px">Choose your AI provider · Groq is tried
+            first, Gemini as fallback</div>
+        </div>
+        <button onclick="closeApiModal()"
+          style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>
+      </div>
+      <!-- GROQ CARD -->
+      <div
+        style="background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.13);border-radius:16px;padding:18px 18px 14px;margin-bottom:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <div
+              style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#f97316,#ea580c);display:flex;align-items:center;justify-content:center;font-size:18px">
+              ⚡</div>
+            <div>
+              <div style="color:white;font-weight:800;font-size:14px">Groq AI</div>
+              <div style="color:rgba(255,255,255,.45);font-size:11px">llama-3.3-70b-versatile · Ultra-fast</div>
+            </div>
+          </div>
+          <span id="groqStatus"
+            style="padding:3px 11px;border-radius:99px;font-size:11px;font-weight:700;background:rgba(255,255,255,.1);color:rgba(255,255,255,.5)">No
+            Key</span>
+        </div>
+        <div style="display:flex;gap:7px">
+          <input id="apiGroqIn" type="password" placeholder="gsk_..."
+            style="flex:1;padding:9px 12px;border-radius:9px;border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:white;font-size:13px"
+            onkeydown="if(event.key==='Enter')saveGroqKey()" />
+          <button onclick="togglePass('apiGroqIn')"
+            style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:8px 11px;border-radius:9px;font-size:14px;cursor:pointer">👁</button>
+          <button onclick="saveGroqKey()"
+            style="background:linear-gradient(135deg,#f97316,#ea580c);color:white;border:none;padding:9px 16px;border-radius:9px;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">✓
+            Save</button>
+        </div>
+        <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+          <a href="https://console.groq.com/api-keys" target="_blank"
+            style="color:rgba(255,165,0,.7);font-size:11px;text-decoration:none">🔗 Get free Groq key ↗</a>
+          <button onclick="clearGroqKey()"
+            style="background:transparent;border:none;color:rgba(255,100,100,.6);font-size:11px;cursor:pointer">Clear
+            key</button>
+        </div>
+      </div>
+      <!-- GEMINI CARD -->
+      <div
+        style="background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.13);border-radius:16px;padding:18px 18px 14px;margin-bottom:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <div
+              style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4285f4,#34a853);display:flex;align-items:center;justify-content:center;font-size:18px">
+              🔵</div>
+            <div>
+              <div style="color:white;font-weight:800;font-size:14px">Google Gemini</div>
+              <div style="color:rgba(255,255,255,.45);font-size:11px">gemini-1.5-flash · Fallback provider</div>
+            </div>
+          </div>
+          <span id="geminiStatus"
+            style="padding:3px 11px;border-radius:99px;font-size:11px;font-weight:700;background:rgba(255,255,255,.1);color:rgba(255,255,255,.5)">No
+            Key</span>
+        </div>
+        <div style="display:flex;gap:7px">
+          <input id="apiGemIn" type="password" placeholder="AIzaSy..."
+            style="flex:1;padding:9px 12px;border-radius:9px;border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:white;font-size:13px"
+            onkeydown="if(event.key==='Enter')saveGeminiKey()" />
+          <button onclick="togglePass('apiGemIn')"
+            style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:8px 11px;border-radius:9px;font-size:14px;cursor:pointer">👁</button>
+          <button onclick="saveGeminiKey()"
+            style="background:linear-gradient(135deg,#4285f4,#34a853);color:white;border:none;padding:9px 16px;border-radius:9px;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">✓
+            Save</button>
+        </div>
+        <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+          <a href="https://aistudio.google.com/app/apikey" target="_blank"
+            style="color:rgba(100,200,255,.7);font-size:11px;text-decoration:none">🔗 Get free Gemini key ↗</a>
+          <button onclick="clearGeminiKey()"
+            style="background:transparent;border:none;color:rgba(255,100,100,.6);font-size:11px;cursor:pointer">Clear
+            key</button>
+        </div>
+      </div>
+
+      <!-- OPENAI CARD -->
+      <div
+        style="background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.13);border-radius:16px;padding:18px 18px 14px;margin-bottom:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:9px">
+            <div
+              style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#10a37f,#0d8a6a);display:flex;align-items:center;justify-content:center;font-size:18px">
+              🟢</div>
+            <div>
+              <div style="color:white;font-weight:800;font-size:14px">OpenAI (GPT-4o/o1)</div>
+              <div style="color:rgba(255,255,255,.45);font-size:11px">gpt-4o-mini · Fast & Powerful</div>
+            </div>
+          </div>
+          <span id="openaiStatus"
+            style="padding:3px 11px;border-radius:99px;font-size:11px;font-weight:700;background:rgba(255,255,255,.1);color:rgba(255,255,255,.5)">No
+            Key</span>
+        </div>
+        <div style="display:flex;gap:7px">
+          <input id="apiOaiIn" type="password" placeholder="sk-..."
+            style="flex:1;padding:9px 12px;border-radius:9px;border:1.5px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:white;font-size:13px"
+            onkeydown="if(event.key==='Enter')saveOpenAIKey()" />
+          <button onclick="togglePass('apiOaiIn')"
+            style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:8px 11px;border-radius:9px;font-size:14px;cursor:pointer">👁</button>
+          <button onclick="saveOpenAIKey()"
+            style="background:linear-gradient(135deg,#10a37f,#0d8a6a);color:white;border:none;padding:9px 16px;border-radius:9px;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">✓
+            Save</button>
+        </div>
+        <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+          <a href="https://platform.openai.com/api-keys" target="_blank"
+            style="color:rgba(16,163,127,.7);font-size:11px;text-decoration:none">🔗 Get OpenAI key ↗</a>
+          <button onclick="clearOpenAIKey()"
+            style="background:transparent;border:none;color:rgba(255,100,100,.6);font-size:11px;cursor:pointer">Clear
+            key</button>
+        </div>
+      </div>
+
+      <div style="text-align:center;color:rgba(255,255,255,.35);font-size:11px;margin-bottom:12px">Groq is tried first →
+        OpenAI → Gemini → error shown if all fail</div>
+
+      <!-- DIAGNOSTIC SECTION -->
+      <div id="diagArea"
+        style="display:none;background:rgba(0,0,0,.3);border-radius:12px;padding:12px;margin-top:10px;border:1px solid rgba(255,255,255,.1)">
+        <div
+          style="color:rgba(255,255,255,.5);font-size:10px;font-weight:800;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between">
+          <span>Connection Diagnostics</span>
+          <span id="diagClose" onclick="document.getElementById('diagArea').style.display='none'"
+            style="cursor:pointer">✕</span>
+        </div>
+        <div id="diagLog"
+          style="font-family:monospace;font-size:11px;color:#cbd5e1;line-height:1.5;max-height:100px;overflow-y:auto;white-space:pre-wrap">
+        </div>
+      </div>
+
+      <div style="margin-top:15px;display:flex;gap:8px">
+        <button onclick="testAiConnection()" id="testBtn"
+          style="flex:1;background:rgba(255,255,255,.1);color:white;border:1.5px solid rgba(255,255,255,.2);padding:10px;border-radius:12px;font-weight:700;font-size:12px;cursor:pointer">🔍
+          Test Groq Connection</button>
+      </div>
+    </div>
+  </div>
+  <!-- legacy hidden apiBanner kept for code compatibility -->
+  <div id="apiBanner" class="hidden" style="display:none!important"></div>
+
+  <!-- APP -->
+  <div id="shell" style="display:none">
+    <div id="sb">
+      <div class="sblogo">
+        <div class="slic">🏫</div>
+        <div id="slt">
+          <div class="sltxt">EduAI Pro</div>
+          <div class="slsub">School System v2</div>
+        </div>
+      </div>
+      <div class="sbusr" id="sbU">
+        <div class="sbav" id="sbAv" style="background:#7c3aed">A</div>
+        <div id="sbUT">
+          <div class="sbname" id="sbName">Administrator</div>
+          <div class="sbrole" id="sbRole">System Admin</div>
+        </div>
+      </div>
+      <nav id="snav"></nav>
+      <div class="sbft">
+        <button class="lout" id="loutBtn" onclick="logout()">⬅ Logout</button>
+        <button class="stog" onclick="toggleSB()" id="stogBtn">◀</button>
+      </div>
+    </div>
+    <div id="main">
+      <div id="topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="mmbtn" onclick="toggleMob()">☰</button>
+          <div>
+            <div id="ttl">📊 Dashboard</div>
+            <div id="tsub">Tuesday, March 17, 2026</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div id="rbdg" style="background:#ede9fe;color:#7c3aed">👑 Admin</div>
+          <button class="nbtn" onclick="openApiModal()" id="apiBtnTop" title="API Key Settings"
+            style="font-size:14px">🔑<span id="apiDot"
+              style="position:absolute;top:4px;right:4px;width:8px;height:8px;border-radius:50%;background:#e11d48;border:2px solid white;display:none"></span></button>
+          <button class="nbtn" onclick="nav('notifications')">🔔<span class="nred" id="ndot"></span></button>
+        </div>
+      </div>
+      <div id="content"></div>
+    </div>
+  </div>
+  <div id="mobOv" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99"
+    onclick="toggleMob()"></div>
+
+  <script>
+    // ───── DUAL API KEYS (GROQ + GEMINI FALLBACK) ─────
+    const _DEFAULT_GROQ = ''; // 🔒 Removed for GitHub security. Users will enter this in the UI!
+    let GROQ_KEY = localStorage.getItem('eduai_groq_k');
+    // Force update if it's the old default or missing
+    if (!GROQ_KEY || GROQ_KEY === 'YOUR_API_KEY' || GROQ_KEY.length < 20) {
+      GROQ_KEY = _DEFAULT_GROQ;
+    }
+    let GEM_KEY = localStorage.getItem('eduai_gemini_k') || '';
+    let OPENAI_KEY = localStorage.getItem('eduai_openai_k') || '';
+    // Legacy alias so rest of codebase still works
+    Object.defineProperty(window, 'AKEY', { get: () => GROQ_KEY || OPENAI_KEY || GEM_KEY, set(v) { }, configurable: true });
+
+    // ─ Modal open/close ─
+    function openApiModal() {
+      const m = document.getElementById('apiModal');
+      m.style.display = 'flex';
+      // Pre-fill with saved keys (masked except default)
+      const gi = document.getElementById('apiGroqIn');
+      const mi = document.getElementById('apiGemIn');
+      const oi = document.getElementById('apiOaiIn');
+      if (gi) gi.value = GROQ_KEY && GROQ_KEY !== _DEFAULT_GROQ ? GROQ_KEY : '';
+      if (mi) mi.value = GEM_KEY || '';
+      if (oi) oi.value = OPENAI_KEY || '';
+      updateApiStatus();
+    }
+    function closeApiModal() {
+      document.getElementById('apiModal').style.display = 'none';
+    }
+    function updateApiStatus() {
+      const gs = document.getElementById('groqStatus');
+      const gms = document.getElementById('geminiStatus');
+      const apiDot = document.getElementById('apiDot');
+      if (gs) {
+        if (GROQ_KEY) { gs.textContent = '✅ Active'; gs.style.background = 'rgba(34,197,94,.2)'; gs.style.color = '#4ade80'; }
+        else { gs.textContent = 'No Key'; gs.style.background = 'rgba(255,255,255,.1)'; gs.style.color = 'rgba(255,255,255,.5)'; }
+      }
+      if (gms) {
+        if (GEM_KEY) { gms.textContent = '✅ Active'; gms.style.background = 'rgba(66,133,244,.2)'; gms.style.color = '#93c5fd'; }
+        else { gms.textContent = 'No Key'; gms.style.background = 'rgba(255,255,255,.1)'; gms.style.color = 'rgba(255,255,255,.5)'; }
+      }
+      if (document.getElementById('openaiStatus')) {
+        const os = document.getElementById('openaiStatus');
+        if (OPENAI_KEY) { os.textContent = '✅ Active'; os.style.background = 'rgba(16,163,127,.2)'; os.style.color = '#10a37f'; }
+        else { os.textContent = 'No Key'; os.style.background = 'rgba(255,255,255,.1)'; os.style.color = 'rgba(255,255,255,.5)'; }
+      }
+      if (apiDot) apiDot.style.display = (!GROQ_KEY && !GEM_KEY && !OPENAI_KEY) ? 'block' : 'none';
+    }
+    function openGetKey() {
+      window.open('https://console.groq.com/api-keys', '_blank');
+      window.open('https://aistudio.google.com/app/apikey', '_blank');
+    }
+    // ─ Groq-specific save/clear ─
+    async function saveGroqKey() {
+      const v = document.getElementById('apiGroqIn')?.value?.trim();
+      if (!v || (!v.startsWith('gsk-') && !v.startsWith('gsk_')) || v.length < 30) { toast('⚠️ Invalid Groq key. Must start with gsk- or gsk_', '#e11d48'); return; }
+      GROQ_KEY = v; localStorage.setItem('eduai_groq_k', v);
+      updateApiStatus();
+      toast('✅ Groq API key saved! AI enabled.', '#f97316');
+      await persist('config', { ...cfg, groq: GROQ_KEY, gemini: GEM_KEY, openai: OPENAI_KEY });
+    }
+    function clearGroqKey() {
+      GROQ_KEY = _DEFAULT_GROQ; localStorage.removeItem('eduai_groq_k');
+      const gi = document.getElementById('apiGroqIn'); if (gi) gi.value = '';
+      updateApiStatus();
+      toast('Groq key reset to default', '#64748b');
+    }
+    // ─ Gemini-specific save/clear ─
+    async function saveGeminiKey() {
+      const v = document.getElementById('apiGemIn')?.value?.trim();
+      if (!v || !v.startsWith('AIzaSy') || v.length < 30) { toast('⚠️ Invalid Gemini key. Must start with AIzaSy', '#e11d48'); return; }
+      GEM_KEY = v; localStorage.setItem('eduai_gemini_k', v);
+      updateApiStatus();
+      toast('✅ Gemini API key saved!', '#4285f4');
+      await persist('config', { ...cfg, groq: GROQ_KEY, gemini: GEM_KEY, openai: OPENAI_KEY });
+    }
+    function clearGeminiKey() {
+      GEM_KEY = ''; localStorage.removeItem('eduai_gemini_k');
+      const mi = document.getElementById('apiGemIn'); if (mi) mi.value = '';
+      updateApiStatus();
+      toast('Gemini key cleared', '#64748b');
+    }
+    // ─ OpenAI-specific save/clear ─
+    async function saveOpenAIKey() {
+      const v = document.getElementById('apiOaiIn')?.value?.trim();
+      if (!v || !v.startsWith('sk-') || v.length < 30) { toast('⚠️ Invalid OpenAI key. Must start with sk-', '#e11d48'); return; }
+      OPENAI_KEY = v; localStorage.setItem('eduai_openai_k', v);
+      updateApiStatus();
+      toast('✅ OpenAI API key saved!', '#10a37f');
+      await persist('config', { ...cfg, groq: GROQ_KEY, gemini: GEM_KEY, openai: OPENAI_KEY });
+    }
+    function clearOpenAIKey() {
+      OPENAI_KEY = ''; localStorage.removeItem('eduai_openai_k');
+      const oi = document.getElementById('apiOaiIn'); if (oi) oi.value = '';
+      updateApiStatus();
+      toast('OpenAI key cleared', '#64748b');
+    }
+    // ─ Legacy saveKey kept for any old references ─
+    function saveKey() { openApiModal(); }
+
+    async function testAiConnection() {
+      const log = document.getElementById('diagLog');
+      const area = document.getElementById('diagArea');
+      const btn = document.getElementById('testBtn');
+      area.style.display = 'block';
+      log.innerHTML = '⚡ Starting connection test...\n';
+      log.innerHTML += `📡 Target: Groq (llama-3.3-70b-versatile)\n`;
+      log.innerHTML += `🔑 Key Prefix: ${GROQ_KEY ? GROQ_KEY.substring(0, 7) + '...' : 'NONE'}\n`;
+
+      if (!GROQ_KEY) { log.innerHTML += '❌ ERROR: No Groq key configured.\n'; return; }
+
+      btn.disabled = true; btn.style.opacity = '0.5';
+      try {
+        const start = Date.now();
+        const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_KEY },
+          body: JSON.stringify({ model: 'llama-3.3-70b-versatile', messages: [{ role: 'user', content: 'hi' }], max_tokens: 5 })
+        });
+        const duration = Date.now() - start;
+        log.innerHTML += `⏱️ Response time: ${duration}ms\n`;
+        log.innerHTML += `🌐 HTTP Status: ${r.status} ${r.statusText}\n`;
+
+        if (r.ok) {
+          const d = await r.json();
+          log.innerHTML += `✅ SUCCESS: Groq responded properly.\n`;
+          log.innerHTML += `💬 AI: "${d.choices[0].message.content}"\n`;
+          toast('✅ Groq connection successful!', '#059669');
+        } else {
+          const errData = await r.json().catch(() => ({}));
+          console.error('[Groq Test] Detailed Error:', errData);
+          log.innerHTML += `❌ FAILURE: Groq returned an error.\n`;
+          log.innerHTML += `📝 ERROR MESSAGE: ${errData.error?.message || JSON.stringify(errData)}\n`;
+          if (r.status === 401) log.innerHTML += `💡 ADVICE: Your API key is likely invalid or expired.\n`;
+          if (r.status === 404) log.innerHTML += `💡 ADVICE: Model name might be incorrect for your tier.\n`;
+          if (r.status === 429) log.innerHTML += `💡 ADVICE: Too many requests. Wait a minute.\n`;
+          toast(`❌ Connection failed (${r.status})`, '#e11d48');
+        }
+      } catch (e) {
+        log.innerHTML += `💥 CRITICAL ERROR: ${e.message}\n`;
+        if (e.message.includes('fetch')) log.innerHTML += `💡 ADVICE: Possible network issue or CORS/Ad-blocker interference.\n`;
+        toast('💥 Network or System Error', '#e11d48');
+      } finally {
+        btn.disabled = false; btn.style.opacity = '1';
+      }
+    }
+
+
+    // ─ Groq call ─
+    async function callGroq(msgs, sys, mt) {
+      let openaiMsgs = msgs.map(m => ({ role: m.role === 'user' ? 'user' : 'assistant', content: m.content }));
+      if (sys && sys.length > 0) openaiMsgs = [{ role: 'system', content: sys }, ...openaiMsgs];
+      const b = { model: 'llama-3.3-70b-versatile', messages: openaiMsgs, max_tokens: mt, temperature: 0.7 };
+      const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_KEY },
+        body: JSON.stringify(b)
+      });
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        console.error('[Groq] API Error:', r.status, e);
+        if (r.status === 401 || r.status === 403) throw new Error('BAD_KEY_GROQ');
+        throw new Error('GROQ_HTTP_' + r.status + (e.error?.message ? ': ' + e.error.message : ''));
+      }
+      const data = await r.json();
+      if (!data?.choices?.[0]?.message?.content) throw new Error('GROQ_EMPTY');
+      return data.choices[0].message.content;
+    }
+
+    // ─ Gemini call ─
+    async function callGemini(msgs, sys, mt) {
+      // 1. Map to Gemini format
+      let rawGemMsgs = msgs.map(m => ({ role: m.role === 'user' ? 'user' : 'model', parts: [{ text: m.content }] }));
+
+      // 2. Clean Gemini messages: Must alternate User/Model and MUST start with User
+      let cleanMsgs = [];
+      rawGemMsgs.forEach(m => {
+        if (cleanMsgs.length === 0) {
+          if (m.role === 'user') cleanMsgs.push(m);
+        } else {
+          let last = cleanMsgs[cleanMsgs.length - 1];
+          if (last.role === m.role) {
+            last.parts[0].text += "\n" + m.parts[0].text;
+          } else {
+            cleanMsgs.push(m);
+          }
+        }
+      });
+
+      // If we cleaned it down to empty (unlikely but possible), avoid error
+      if (cleanMsgs.length === 0) throw new Error('GEMINI_INPUT_EMPTY');
+
+      const b = { contents: cleanMsgs, generationConfig: { maxOutputTokens: mt, temperature: 0.7 } };
+      if (sys && sys.length > 0) b.systemInstruction = { parts: [{ text: sys }] };
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEM_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(b)
+      });
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        console.error('[Gemini] API Error:', r.status, e);
+        if (r.status === 400 && e?.error?.message?.includes('API key')) throw new Error('BAD_KEY_GEMINI');
+        throw new Error('GEMINI_HTTP_' + r.status + (e.error?.message ? ': ' + e.error.message : ''));
+      }
+      const data = await r.json();
+      if (!data?.candidates?.[0]?.content?.parts?.[0]?.text) throw new Error('GEMINI_EMPTY');
+      return data.candidates[0].content.parts[0].text;
+    }
+
+    // ─ OpenAI call ─
+    async function callOpenAI(msgs, sys, mt) {
+      let openaiMsgs = msgs.map(m => ({ role: m.role === 'user' ? 'user' : 'assistant', content: m.content }));
+      if (sys && sys.length > 0) openaiMsgs = [{ role: 'system', content: sys }, ...openaiMsgs];
+      const b = { model: 'gpt-4o-mini', messages: openaiMsgs, max_tokens: mt, temperature: 0.7 };
+      const r = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + OPENAI_KEY },
+        body: JSON.stringify(b)
+      });
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        console.error('[OpenAI] API Error:', r.status, e);
+        if (r.status === 401) throw new Error('BAD_KEY_OPENAI');
+        throw new Error('OPENAI_HTTP_' + r.status + (e.error?.message ? ': ' + e.error.message : ''));
+      }
+      const data = await r.json();
+      if (!data?.choices?.[0]?.message?.content) throw new Error('OPENAI_EMPTY');
+      return data.choices[0].message.content;
+    }
+
+    // ─ Main AI function with fallback ─
+    async function claude(msgs, sys, mt = 1000, addFooter = true) {
+      if (!GROQ_KEY && !GEM_KEY && !OPENAI_KEY) {
+        document.getElementById('apiBanner').classList.remove('hidden');
+        throw new Error('NO_KEY');
+      }
+      let reply = null, usedProvider = null, lastErr = null;
+      // Try Groq first
+      if (GROQ_KEY) {
+        try {
+          console.log('[API] Trying Groq...');
+          reply = await callGroq(msgs, sys, mt);
+          usedProvider = 'Groq';
+        } catch (e) {
+          console.warn('[API] Groq failed:', e.message);
+          lastErr = e;
+        }
+      }
+      // Try OpenAI second
+      if (!reply && OPENAI_KEY) {
+        try {
+          console.log('[API] Trying OpenAI...');
+          reply = await callOpenAI(msgs, sys, mt);
+          usedProvider = 'OpenAI';
+        } catch (e) {
+          console.warn('[API] OpenAI failed:', e.message);
+          lastErr = e;
+        }
+      }
+      // Fall back to Gemini
+      if (!reply && GEM_KEY) {
+        try {
+          console.log('[API] Trying Gemini...');
+          reply = await callGemini(msgs, sys, mt);
+          usedProvider = 'Gemini';
+        } catch (e) {
+          console.error('[API] Gemini also failed:', e.message);
+          lastErr = e;
+        }
+      }
+      if (!reply) {
+        // All failed
+        const m = lastErr?.message || '';
+        if (m.includes('NO_KEY') || (!GROQ_KEY && !GEM_KEY && !OPENAI_KEY)) throw new Error('NO_KEY');
+        if (m.includes('BAD_KEY')) throw new Error('BAD_KEY');
+        if (m.includes('fetch') || m.includes('TypeError')) throw new Error('NETWORK_ERROR');
+        throw new Error('ALL_AI_PROVIDERS_FAILED: ' + m);
+      }
+      console.log('[API] Response received via', usedProvider);
+      if (addFooter) reply += '\n\n📚 For more details, refer to official government sources and guidelines.';
+      return { content: [{ text: reply }] };
+    }
+    function extractJSON(s) { try { const start = s.indexOf('{'), end = s.lastIndexOf('}'); if (start !== -1 && end !== -1) return s.substring(start, end + 1); return s; } catch (e) { return s; } }
+    function toast(msg, color = '#7c3aed') {
+      const t = document.createElement('div'); t.className = 'toast'; t.style.background = color; t.textContent = msg;
+      document.body.appendChild(t); setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .4s'; setTimeout(() => t.remove(), 400); }, 3000);
+    }
+
+    // ───── DATA (with demo fallbacks for resilient login) ─────
+    const AB = ['#7c3aed', '#ec4899', '#f59e0b', '#10b981', '#ef4444', '#3b82f6', '#6366f1', '#8b5cf6'];
+    const AC = {
+      'available': { d: '#059669', l: 'Available' },
+      'on-leave': { d: '#e11d48', l: 'On Leave' },
+      'busy': { d: '#d97706', l: 'Busy' }
+    };
+    const CREDS = {
+      admin: { role: 'System Admin', icon: '👑' },
+      coordinator: { role: 'Academic Coordinator', icon: '🎯' },
+      teacher: { role: 'Class Teacher', icon: '👩‍🏫' }
+    };
+
+    const NAVS = [
+      { id: 'dashboard', l: 'Dashboard', i: '📊' },
+      { id: 'availability', l: 'Availability', i: '🟢' },
+      { id: 'teachers', l: 'Teachers', i: '👩‍🏫' },
+      { id: 'students', l: 'Students', i: '🎓' },
+      { id: 'leaves', l: 'Leaves', i: '🏖️' },
+      { id: 'substitutes', l: 'Substitutes', i: '🔄' },
+      { id: 'timetable', l: 'Timetable', i: '📅' },
+      { id: 'analytics', l: 'Analytics', i: '📈' },
+      { id: 'reports', l: 'AI Reports', i: '📝' },
+      { id: 'chat', l: 'AI Assistant', i: '🤖' },
+      { id: 'notifications', l: 'Notifications', i: '🔔' },
+      { id: 'settings', l: 'Settings', i: '⚙️' }
+    ];
+
+    const RACCL = {
+      admin: ['dashboard', 'availability', 'teachers', 'students', 'leaves', 'substitutes', 'timetable', 'analytics', 'reports', 'chat', 'notifications', 'settings'],
+      coordinator: ['dashboard', 'availability', 'teachers', 'students', 'leaves', 'substitutes', 'timetable', 'analytics', 'reports', 'chat', 'notifications', 'settings'],
+      teacher: ['dashboard', 'availability', 'leaves', 'timetable', 'chat', 'notifications', 'settings']
+    };
+
+    const MN = [
+      { m: 'Sep', a: 92, c: 85 }, { m: 'Oct', a: 100, c: 100 }, { m: 'Nov', a: 87, c: 75 },
+      { m: 'Dec', a: 100, c: 100 }, { m: 'Jan', a: 89, c: 80 }, { m: 'Feb', a: 100, c: 100 }, { m: 'Mar', a: 86, c: 74 }
+    ];
+
+    const SC = {
+      'Mathematics': '#7c3aed', 'Physics': '#3b82f6', 'Chemistry': '#ec4899',
+      'Biology': '#10b981', 'English': '#f59e0b', 'History': '#ef4444',
+      'Geography': '#0891b2', 'CS': '#6366f1', 'PE': '#f43f5e', 'Art': '#8b5cf6'
+    };
+
+    let TT = {};
+
+    let role = 'admin', user = { name: 'Administrator', email: 'admin@school.edu' };
+    let tab = 'dashboard', sbCol = false;
+    let cfg = { notifs: true, email: true, sound: false, autoAI: false, compact: false, target: 90, maxWL: 8, lvLocked: false };
+
+    // Default users as fallback if MongoDB connection fails
+    let USERS = {
+      admin: [{ u: 'admin', p: 'admin123', name: 'Administrator', email: 'admin@school.edu', id: 0 }],
+      coordinator: [{ u: 'coord', p: 'coord123', name: 'Ms. Coordinator', email: 'coord@school.edu', id: 99 }],
+      teacher: [{ u: 'teacher', p: 'teach123', name: 'Mr. Raj Kumar', email: 'raj@school.edu', id: 1 }]
+    };
+    let ALL_CLASSES = ['10-A', '10-B', '11-A', '11-B', '9-A', '9-B', '9-C'];
+    let teachers = [{ id: 1, name: 'Mr. Raj Kumar', subjects: ['Mathematics'], dept: 'Science', email: 'raj@school.edu', phone: '+91-98765-43210', exp: 12, avail: 'available', workload: 5, rating: 4.8 }];
+    let students = [{ id: 1, name: 'Aisha Khan', roll: '101', cls: '10-A', parent: 'Mr. Khan', phone: '+91-99999-88888', attendance: 95, grades: { Math: 'A', Science: 'B+', English: 'A-' } }];
+    let absences = [];
+    let leaves = [];
+    let notifs = [];
+    let chatH = [{ role: 'assistant', content: '👋 Hi! I\'m your AI School Assistant, powered by Google Gemini AI.\n\nI can help you:\n• Find the best substitute teacher\n• Check who\'s free for a specific subject\n• Analyze teacher workload & predict burnout\n• Suggest hiring needs based on trends\n• Answer any school management question\n\nTry: "Who is free for Math tomorrow?" or "Which teacher needs a break?"' }];
+    let chatLoad = false;
+
+    // Database Persistence Helpers
+    async function loadData() {
+      try {
+        const res = await fetch('/api/all-data');
+        const data = await res.json();
+        teachers = data.teachers || [];
+        students = data.students || [];
+        absences = data.absences || [];
+        leaves = data.leaves || [];
+        notifs = data.notifs || [];
+        if (students.length > 0) {
+          const clsSet = new Set(students.map(s => s.cls));
+          ALL_CLASSES = [...clsSet].sort();
+        }
+        if (data.config) {
+          cfg = data.config;
+          if (data.config.groq) GROQ_KEY = data.config.groq;
+          if (data.config.gemini) GEM_KEY = data.config.gemini;
+          if (data.config.openai) OPENAI_KEY = data.config.openai;
+        }
+        if (data.users) USERS = data.users;
+
+        // Process timetable
+        if (data.timetable && Array.isArray(data.timetable)) {
+          TT = {};
+          data.timetable.forEach(row => {
+            const day = row.day || 'Unknown';
+            if (!TT[day]) TT[day] = [];
+            // Merge row data into entry
+            const entry = { p: row.p, t: row.t };
+            if (row.data) Object.assign(entry, row.data);
+            TT[day].push(entry);
+          });
+          // Sort by period p
+          Object.keys(TT).forEach(d => {
+            TT[d].sort((a, b) => a.p - b.p);
+          });
+          console.log("✅ Timetable entries processed:", data.timetable.length);
+        } else {
+          console.warn("⚠️ No timetable data found in API response");
+        }
+
+        console.log("✅ Data loaded from MongoDB");
+      } catch (err) {
+        console.error("❌ Failed to load data:", err);
+        toast("Failed to connect to server", "#e11d48");
+      }
+    }
+
+    async function persist(type, item) {
+      try {
+        let endpoint = `/api/${type}`;
+        let payload = item;
+
+        if (type === 'TT' || type === 'timetable') {
+          endpoint = '/api/timetable';
+          if (!item.day && !item.p && typeof item === 'object' && !Array.isArray(item)) {
+            // It's the full TT object. Flatten to array for MongoDB insertMany
+            payload = [];
+            for (let day in item) {
+              item[day].forEach(row => {
+                const rData = { ...row };
+                delete rData.p; delete rData.t;
+                payload.push({ day, p: row.p, t: row.t, data: rData });
+              });
+            }
+          }
+        }
+
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || `HTTP ${res.status}`);
+        }
+      } catch (err) {
+        console.error(`❌ Failed to persist ${type}:`, err);
+        toast(`Sync Error: ${err.message}`, "#e11d48");
+      }
+    }
+
+    // ───── HELPERS ─────
+    function getTeacherSchedule(name, day) {
+      const dayRows = (TT && TT[day]) || [];
+      const classes = ALL_CLASSES;
+      // Get absences for this teacher on this day (mock maps to Tuesday 2026-03-17)
+      const dayMapRev = { 'Tuesday': '2026-03-17', 'Wednesday': '2026-03-18', 'Thursday': '2026-03-19', 'Friday': '2026-03-20', 'Saturday': '2026-03-21' };
+      const dateStr = dayMapRev[day];
+      const myAbsences = absences.filter(a => a.teacher === name && a.date === dateStr);
+
+      return dayRows.map(r => {
+        let assignedClass = "Free";
+        const isAbsent = myAbsences.find(a =>
+          a.period === r.p ||
+          a.period === 'All' ||
+          String(a.period).includes(String(r.p)) ||
+          (a.subsAssigned && String(r.p) in a.subsAssigned)
+        );
+
+        for (let c of classes) {
+          if (r[c]) {
+            // Handle substitution (s)
+            const rowTeacher = r[c].tc;
+            if (rowTeacher === name || rowTeacher === name + '(s)') {
+              assignedClass = c + (rowTeacher.includes('(s)') ? ' (Sub)' : '');
+              break;
+            }
+          }
+        }
+
+        if (isAbsent && !assignedClass.includes('(Sub)')) return { p: r.p, t: r.t, cls: '🔴 ABSENT' };
+        return { p: r.p, t: r.t, cls: assignedClass };
+      });
+    }
+
+    function rPersonalTT(name, day) {
+      const sched = getTeacherSchedule(name, day);
+      return `<div class="card" style="margin-top:10px;padding:0;overflow:hidden">
+        <div style="background:#7c3aed;color:white;padding:10px 15px;font-weight:800;font-size:13px;display:flex;justify-content:space-between;align-items:center">
+          <span>📅 ${name}'s Schedule — ${day}</span>
+          <div style="display:flex;gap:4px">
+            ${['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map(d => `<button onclick="this.closest('.tcard').querySelector('.sched-box').innerHTML=rPersonalTT('${name}','${d}')" style="background:${d === day ? 'white' : 'transparent'};color:${d === day ? '#7c3aed' : 'white'};border:none;padding:2px 6px;border-radius:4px;font-size:10px;cursor:pointer;font-weight:700">${d.slice(0, 3)}</button>`).join('')}
+          </div>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <thead><tr style="background:#f8fafc;border-bottom:1px solid var(--gb)"><th style="padding:8px;text-align:left;color:#64748b">Period</th><th style="padding:8px;text-align:left;color:#64748b">Time</th><th style="padding:8px;text-align:left;color:#64748b">Class</th></tr></thead>
+          <tbody>
+            ${sched.map(s => {
+        const isFree = s.cls === 'Free';
+        const isAbsent = s.cls.includes('ABSENT');
+        const isSub = s.cls.includes('(Sub)');
+        const color = isAbsent ? '#e11d48' : isSub ? '#0891b2' : isFree ? '#d97706' : '#059669';
+        const bg = isAbsent ? '#fef2f2' : isSub ? '#ecfeff' : isFree ? '#fffbeb' : 'white';
+        const icon = isAbsent ? '❌ ' : isSub ? '🔄 ' : isFree ? '☕ ' : '📖 ';
+        return `<tr style="border-bottom:1px solid #f1f5f9;background:${bg}">
+                <td style="padding:8px;font-weight:800;color:#7c3aed">P${s.p}</td>
+                <td style="padding:8px;color:#64748b">${s.t}</td>
+                <td style="padding:8px;font-weight:800;color:${color}">${icon + s.cls}</td>
+              </tr>`;
+      }).join('')}
+          </tbody>
+        </table>
+      </div>`;
+    }
+
+    function avbg(n) { return AB[(n || '?').charCodeAt(0) % 8]; }
+    function ini(n) { return (n || '?').split(' ').map(x => x[0]).join('').slice(0, 2).toUpperCase(); }
+    function unread() { return notifs.filter(n => !n.read).length; }
+    function updDot() { const d = document.getElementById('ndot'); if (d) d.style.display = unread() > 0 ? 'block' : 'none'; }
+
+    // ───── LOGIN ─────
+    let selRole = 'admin';
+    function pickRole(r, el) {
+      selRole = r;
+      document.querySelectorAll('.lrole').forEach(e => e.classList.remove('active'));
+      el.classList.add('active');
+      const userList = USERS[r] || [];
+      const firstUser = userList[0];
+      if (firstUser) {
+        document.getElementById('lUser').value = firstUser.u;
+        document.getElementById('lPass').value = firstUser.p;
+      }
+    }
+    function togglePass(id) {
+      const i = document.getElementById(id);
+      i.type = i.type === 'password' ? 'text' : 'password';
+    }
+    function login() {
+      const u = document.getElementById('lUser').value.trim();
+      const p = document.getElementById('lPass').value.trim();
+      const userList = USERS[selRole] || [];
+      const foundUser = userList.find(x => x.u === u && x.p === p);
+      if (!foundUser) { const e = document.getElementById('lErr'); e.textContent = '❌ Invalid credentials. Try again.'; e.style.display = 'block'; setTimeout(() => e.style.display = 'none', 3000); return; }
+      role = selRole; user = { name: foundUser.name, email: foundUser.email, username: u, id: foundUser.id };
+      document.getElementById('loginScreen').style.opacity = '0';
+      document.getElementById('loginScreen').style.transition = 'opacity .3s';
+      setTimeout(() => {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('shell').style.display = 'flex';
+        initApp();
+        toast(`👋 Welcome ${foundUser.name}!`, '#7c3aed');
+      }, 300);
+    }
+    function logout() {
+      document.getElementById('shell').style.display = 'none';
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('loginScreen').style.opacity = '1';
+      chatH = [{ role: 'assistant', content: '👋 Hi! I\'m your AI School Assistant. How can I help you today?' }];
+    }
+
+    // ───── APP INIT ─────
+    async function initApp() {
+      await loadData();
+      const ic = { admin: '👑', coordinator: '🎯', teacher: '👩‍🏫' };
+      const rc = { admin: { bg: '#ede9fe', c: '#7c3aed' }, coordinator: { bg: '#e0f2fe', c: '#0891b2' }, teacher: { bg: '#d1fae5', c: '#059669' } };
+      document.getElementById('sbAv').textContent = ini(user.name);
+      document.getElementById('sbAv').style.background = rc[role].c || '#7c3aed';
+      document.getElementById('sbName').textContent = user.name;
+      // Using first role for display
+      const displayRole = role.charAt(0).toUpperCase() + role.slice(1);
+      document.getElementById('sbRole').textContent = displayRole + ' Mode';
+      const rb = document.getElementById('rbdg'); rb.style.background = rc[role].bg; rb.style.color = rc[role].c;
+      rb.textContent = ic[role] + ' ' + displayRole;
+      updateApiStatus();
+      if (!AKEY) setTimeout(() => openApiModal(), 600);
+      else setTimeout(() => toast('🤖 AI Assistant ready!', '#7c3aed'), 800);
+      renderNav(); nav('dashboard'); updDot();
+      // AUTO-TRIGGER AI ANALYSIS on app load
+      if (AKEY) setTimeout(() => autoAnalyzeData(), 2000);
+    }
+
+    // ───── AUTO SCHOOL DATA ANALYSIS ─────
+    let analysisResults = null;
+    async function autoAnalyzeData() {
+      if (!AKEY) { console.log('[AUTO-ANALYSIS] No API key, skipping'); return; }
+      console.log('[AUTO-ANALYSIS] Starting automatic school data analysis...');
+      try {
+        const totalAbsences = absences.length;
+        const coveredAbsences = absences.filter(a => a.status === 'assigned').length;
+        const pendingAbsences = absences.filter(a => a.status === 'pending').length;
+        const avgTeacherWorkload = Math.round(teachers.reduce((a, t) => a + t.workload, 0) / teachers.length);
+        const criticalWorkload = teachers.filter(t => t.workload >= 8).length;
+        const avgStudentAttendance = Math.round(students.reduce((a, s) => a + s.attendance, 0) / students.length);
+        const lowAttendanceStudents = students.filter(s => s.attendance < 80).length;
+        const averageTeacherRating = Math.round((teachers.reduce((a, t) => a + t.rating, 0) / teachers.length) * 10) / 10;
+        const departmentStats = Array.from(new Set(teachers.map(t => t.dept))).map(dept => { const deptTeachers = teachers.filter(t => t.dept === dept).length; const deptAbsences = absences.filter(a => teachers.find(t => t.id === a.teacherId && t.dept === dept)).length; return { dept, teachers: deptTeachers, absences: deptAbsences }; });
+        const pendingLeaves = leaves.filter(l => l.status === 'pending').length;
+        const approvedLeaves = leaves.filter(l => l.status === 'approved').length;
+        const dataAnalysisSummary = `COMPREHENSIVE SCHOOL DATA ANALYSIS - March 17, 2026\nOPERATIONAL METRICS:\n- Total Teachers: ${teachers.length} staff\n- Teacher Availability: ${teachers.filter(t => t.avail === 'available').length} available, ${teachers.filter(t => t.avail === 'busy').length} busy, ${teachers.filter(t => t.avail === 'on-leave').length} on leave\n- Avg Workload: ${avgTeacherWorkload}/10 (${criticalWorkload} at critical ≥8)\n- Students: ${students.length} enrolled, ${avgStudentAttendance}% attendance\n\nABSENCE & COVERAGE:\n- Total Absences: ${totalAbsences} (${coveredAbsences} covered, ${pendingAbsences} pending)\n- Coverage Rate: ${totalAbsences > 0 ? Math.round(coveredAbsences / totalAbsences * 100) : 100}% (Target: ${cfg.target}%)\n- Pending Leaves: ${pendingLeaves}, Approved: ${approvedLeaves}\n\nDEPARTMENT STATUS:\n${departmentStats.map(d => `- ${d.dept}: ${d.teachers} teachers, ${d.absences} absences`).join('\n')}`;
+        const analysisPrompt = `School Management AI: Analyze this school data and provide insights:\n\n${dataAnalysisSummary}\n\nProvide analysis on:\n1. CRITICAL ISSUES (urgent problems)\n2. WORKLOAD ANALYSIS (teacher burnout risk)\n3. COVERAGE GAPS (uncovered absences)\n4. HIRING RECOMMENDATIONS (staffing needs)\n5. TOP PERFORMERS (excellent teachers)\n6. QUICK WINS (immediate improvements)\n\nBe concise and actionable.`;
+        console.log('[AUTO-ANALYSIS] Sending data to Gemini...');
+        const response = await claude([{ role: 'user', content: analysisPrompt }], 'Expert school management analyst.', 1500);
+        const analysisText = response.content?.[0]?.text || 'Analysis incomplete.';
+        analysisResults = { timestamp: new Date().toLocaleString(), summary: dataAnalysisSummary, analysis: analysisText };
+        console.log('[AUTO-ANALYSIS] Analysis complete!');
+        notifs.unshift({ id: Date.now(), msg: `✅ AI Analysis Done: ${criticalWorkload > 0 ? '⚠️ ' + criticalWorkload + ' high-workload teachers' : 'Normal workload'} · ${pendingAbsences > 0 ? '📌 ' + pendingAbsences + ' gaps' : 'Coverage on track'}`, type: 'success', time: 'Just now', read: false });
+        toast('🤖 School analysis complete!', '#059669');
+        updDot(); renderNav();
+      } catch (e) {
+        console.error('[AUTO-ANALYSIS] Error:', e.message);
+        let msg = 'AI analysis failed. Check API key.';
+        if (e.message === 'NO_KEY') msg = 'API key missing.';
+        else if (e.message === 'BAD_KEY') msg = 'Invalid API key.';
+        else if (e.message === 'NETWORK_ERROR') msg = 'Network error.';
+        analysisResults = { timestamp: new Date().toLocaleString(), summary: 'Failed', analysis: msg };
+      }
+    }
+
+    // ───── NAVIGATION ─────
+    function toggleSB() {
+      sbCol = !sbCol;
+      document.getElementById('sb').classList.toggle('col', sbCol);
+      document.getElementById('stogBtn').textContent = sbCol ? '▶' : '◀';
+      ['slt', 'sbUT', 'loutBtn'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = sbCol ? 'none' : ''; });
+      document.querySelectorAll('.nlbl').forEach(el => el.style.display = sbCol ? 'none' : '');
+    }
+    function toggleMob() {
+      const sb = document.getElementById('sb'), ov = document.getElementById('mobOv');
+      const open = sb.classList.toggle('mopen'); ov.style.display = open ? 'block' : 'none';
+    }
+    function renderNav() {
+      const nv = document.getElementById('snav'); nv.innerHTML = '';
+      NAVS.forEach(item => {
+        if (!RACCL[role]?.includes(item.id)) return;
+        const b = document.createElement('button');
+        b.className = 'nb' + (tab === item.id ? ' on' : '');
+        const bdg = item.id === 'notifications' ? unread() : 0;
+        b.innerHTML = `<span class="nic">${item.i}</span><span class="nlbl"${sbCol ? ' style="display:none"' : ''}>${item.l}</span>${bdg > 0 ? `<span class="nbdg">${bdg}</span>` : ''}`;
+        b.onclick = () => { nav(item.id); if (window.innerWidth <= 768) toggleMob(); };
+        nv.appendChild(b);
+      });
+    }
+    const TITL = { dashboard: '📊 Dashboard', availability: '🟢 Availability', teachers: '👩‍🏫 Teachers', students: '🎓 Students', leaves: '🏖️ Leave Management', substitutes: '🔄 Substitutes', timetable: '📅 Timetable', analytics: '📈 Analytics', reports: '📝 AI Reports', chat: '🤖 AI Assistant', notifications: '🔔 Notifications', settings: '⚙️ Settings' };
+    function nav(t) {
+      if (!RACCL[role]?.includes(t)) t = 'dashboard';
+      tab = t; renderNav();
+      document.getElementById('ttl').textContent = TITL[t] || t;
+      const c = document.getElementById('content'); c.innerHTML = '';
+      const d = document.createElement('div'); d.className = 'fu'; c.appendChild(d);
+      ({ dashboard: rDash, availability: rAvail, teachers: rTeach, students: rStudents, leaves: rLeaves, substitutes: rSubs, timetable: () => rTT('Tuesday'), analytics: rAnal, reports: rReports, chat: rChat, notifications: rNotifs, settings: rSettings }[t] || rDash)(d);
+      if (t === 'settings' && role === 'admin') setTimeout(() => updateUserList(), 100);
+      updDot();
+    }
+
+    // ───── DASHBOARD ─────
+    function rDash(el) {
+      const avl = teachers.filter(t => t.avail === 'available').length;
+      const pen = absences.filter(a => a.status === 'pending').length;
+      const asg = absences.filter(a => a.status === 'assigned').length;
+      const mx = Math.max(...MN.map(m => m.a));
+      const tod = absences.filter(a => a.date === '2026-03-17');
+      el.innerHTML = `
+  ${cfg.autoAI ? `<div style="padding:11px 16px;background:linear-gradient(135deg,#dcfce7,#d1fae5);border-radius:12px;border:1px solid #bbf7d0;margin-bottom:16px;font-size:13px;color:#15803d;font-weight:600;display:flex;align-items:center;gap:8px"><span style="font-size:18px">🤖</span><span><strong>AI Auto-Assign ON:</strong> When absence reported or leave approved, AI automatically finds & assigns best substitute</span></div>` : '<div style="padding:11px 16px;background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:12px;border:1px solid #fcd34d;margin-bottom:16px;font-size:13px;color:#92400e;font-weight:600;display:flex;align-items:center;gap:8px"><span style="font-size:18px">⚙️</span><span>AI Auto-Assign OFF. Go to <a href="#" onclick="nav(\'settings\'); return false" style="color:#92400e;text-decoration:underline;font-weight:800">Settings</a> to enable automatic substitute assignment</span></div>'}
+  <div class="stat-grid">
+    ${[['👩‍🏫', teachers.length, 'Total Teachers', 'Active staff', '#7c3aed'], ['✅', avl, 'Available Now', 'Ready to teach', '#059669'], ['⚠️', pen, 'Pending Absences', 'Need substitute', '#d97706'], ['🔄', asg, 'Covered Today', 'Substitutes set', '#0891b2']].map(([ic, v, l, s, c]) => `
+    <div class="scard" style="border-top-color:${c}">
+      <div style="font-size:28px;margin-bottom:8px">${ic}</div>
+      <div style="font-size:34px;font-weight:900;color:${c};line-height:1">${v}</div>
+      <div style="font-weight:800;color:var(--tx);font-size:14px;margin-top:6px">${l}</div>
+      <div style="color:#94a3b8;font-size:12px;margin-top:2px">${s}</div>
+    </div>`).join('')}
+  </div>
+  ${role === 'teacher' ? `<div style="margin-top:20px;margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-weight:900;font-size:16px;color:var(--tx)">🗓️ Your Schedule for Today (Tuesday)</div>
+      <button class="btn bp" style="font-size:11px" onclick="nav('timetable')">View Full Week ↗</button>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;border:2.5px solid #7c3aed">
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <thead><tr style="background:#7c3aed;color:white"><th style="padding:12px;text-align:left">Period</th><th style="padding:12px;text-align:left">Time</th><th style="padding:12px;text-align:left">Class Assignment</th></tr></thead>
+        <tbody>
+          ${getTeacherSchedule(user.name, 'Tuesday').map((s, i) => {
+        const isFree = s.cls === 'Free';
+        const isAbsent = s.cls.includes('ABSENT');
+        const isSub = s.cls.includes('(Sub)');
+        const color = isAbsent ? '#e11d48' : isSub ? '#0891b2' : isFree ? '#d97706' : '#059669';
+        const bg = isAbsent ? '#fef2f2' : isSub ? '#ecfeff' : isFree ? '#fffbeb' : (i % 2 === 0 ? 'white' : '#fafbff');
+        const icon = isAbsent ? '❌ ' : isSub ? '🔄 ' : isFree ? '☕ ' : '📖 ';
+        const lbl = isAbsent ? s.cls : isSub ? 'SUBSTITUTE: ' + s.cls : 'CLASS ' + s.cls;
+        return `<tr style="border-bottom:1px solid #f1f5f9;background:${bg}">
+              <td style="padding:12px;font-weight:800;color:#7c3aed">P${s.p}</td>
+              <td style="padding:12px;color:#64748b">${s.t}</td>
+              <td style="padding:12px;font-weight:900;color:${color}">${icon + lbl}</td>
+            </tr>`;
+      }).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>` : ''}
+  <div class="g2" style="margin-bottom:16px">
+    <div class="card">
+      <div class="ct">📊 Monthly Absence vs Coverage</div>
+      <div class="cbar">
+        ${MN.map(m => `<div class="cg"><div style="display:flex;align-items:flex-end;gap:2px;height:120px"><div class="cb" style="background:#e11d48;height:${Math.round(m.a / mx * 100)}%;width:13px" title="Absent:${m.a}"></div><div class="cb" style="background:#059669;height:${Math.round(m.c / mx * 100)}%;width:13px" title="Covered:${m.c}"></div></div><div class="clbl">${m.m}</div></div>`).join('')}
+      </div>
+      <div style="display:flex;gap:12px;margin-top:8px">
+        <span style="font-size:11px;color:#64748b;display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:10px;height:10px;background:#e11d48;border-radius:2px"></span>Absent</span>
+        <span style="font-size:11px;color:#64748b;display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:10px;height:10px;background:#059669;border-radius:2px"></span>Covered</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ct">🚨 Today's Absences — Mar 17</div>
+      ${tod.length === 0 ? '<p style="color:#94a3b8;font-size:13px">No absences today 🎉</p>' : ''}
+      ${tod.map(ab => { const sub = ab.subId ? teachers.find(t => t.id === ab.subId) : null; return `<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;margin-bottom:8px;background:${ab.status === 'pending' ? '#fff7ed' : '#f0fdf4'};border:1px solid ${ab.status === 'pending' ? '#fed7aa' : '#bbf7d0'}"><span style="font-size:20px">${ab.status === 'pending' ? '🔴' : '🟢'}</span><div style="flex:1"><div style="font-weight:800;font-size:13px;color:var(--tx)">${ab.teacher}</div><div style="color:#64748b;font-size:11px">${ab.subject} · Class ${ab.cls} · P${ab.period}</div>${sub ? `<div style="color:#15803d;font-size:11px;font-weight:700;margin-top:1px">✅ ${sub.name}</div>` : ''}</div><span style="padding:3px 9px;border-radius:99px;font-size:10px;font-weight:800;background:${ab.status === 'pending' ? '#fed7aa' : '#bbf7d0'};color:${ab.status === 'pending' ? '#c2410c' : '#15803d'}">${ab.status.toUpperCase()}</span></div>`; }).join('')}
+    </div>
+  </div>
+  <div class="card">
+    <div class="ct">👩‍🏫 Quick Availability Overview — click to manage</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:8px">
+      ${teachers.map(t => { const a = AC[t.avail]; return `<div style="display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:10px;background:${a.bg}20;border:1px solid ${a.bg};cursor:pointer;transition:all .2s" onclick="nav('availability')" title="Manage availability"><div class="avatar" style="width:34px;height:34px;font-size:12px;background:${avbg(t.name)}">${ini(t.name)}</div><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:12px;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.name}</div><div style="font-size:10px;color:#64748b">${t.subjects[0]}</div></div><div style="width:8px;height:8px;border-radius:50%;background:${a.d};flex-shrink:0"></div></div>`; }).join('')}
+    </div>
+  </div>`;
+    }
+
+    // ───── AVAILABILITY ─────
+    function rAvail(el) {
+      el.innerHTML = `
+  <div class="fb" style="margin-bottom:18px">
+    <div><div class="stitle">🟢 Real-Time Availability</div><div class="ssub">Teachers can update their own status here · Changes reflect instantly</div></div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap">
+      ${['available', 'busy', 'on-leave'].map(s => `<span style="padding:5px 14px;border-radius:99px;font-size:12px;font-weight:700;background:${AC[s].bg};color:${AC[s].c};cursor:pointer" onclick="filtAvail('${s}')">${AC[s].l} (${teachers.filter(t => t.avail === s).length})</span>`).join('')}
+      <span style="padding:5px 14px;border-radius:99px;font-size:12px;font-weight:700;background:#f1f5f9;color:#64748b;cursor:pointer" onclick="filtAvail('all')">Show All</span>
+    </div>
+  </div>
+  <div class="apanel">
+    <div class="aph">🏫 Staff Availability Board — Tuesday, March 17, 2026</div>
+    <div id="availList">
+      ${teachers.map(t => {
+        const a = AC[t.avail]; const wc = t.workload >= 8 ? '#e11d48' : t.workload >= 6 ? '#d97706' : '#059669'; return `<div class="apr" id="avr-${t.id}">
+        <div class="avatar" style="width:42px;height:42px;font-size:14px;background:${avbg(t.name)}">${ini(t.name)}</div>
+        <div style="flex:1;min-width:0"><div style="font-weight:700;font-size:14px;color:var(--tx)">${t.name}</div><div style="font-size:11px;color:#64748b;margin-top:1px">${t.dept} · ${t.subjects.slice(0, 2).join(', ')}</div></div>
+        <div style="text-align:right;margin-right:10px;flex-shrink:0"><div style="font-size:9px;color:#64748b;font-weight:700;text-transform:uppercase">Workload</div><div style="font-size:13px;font-weight:900;color:${wc}">${t.workload}/10</div></div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          ${['available', 'busy', 'on-leave'].map(s => `<button onclick="setAvail(${t.id},'${s}')" style="padding:5px 12px;border-radius:99px;border:2px solid ${t.avail === s ? AC[s].d : '#e2e8f0'};background:${t.avail === s ? AC[s].bg : 'white'};color:${t.avail === s ? AC[s].c : '#94a3b8'};font-weight:${t.avail === s ? 800 : 600};font-size:11px;cursor:pointer;transition:all .2s">${s === 'available' ? '✅' : s === 'busy' ? '🕐' : '🏖️'} ${AC[s].l}</button>`).join('')}
+        </div>
+      </div>`;
+      }).join('')}
+    </div>
+  </div>
+  <div class="g2" style="margin-top:16px">
+    <div class="card">
+      <div class="ct">📊 Availability Summary</div>
+      ${['available', 'busy', 'on-leave'].map(s => { const n = teachers.filter(t => t.avail === s).length; const p = Math.round(n / teachers.length * 100); const a = AC[s]; return `<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:13px;font-weight:700;color:${a.c}">${a.l}</span><span style="font-size:13px;font-weight:800;color:var(--tx)">${n} (${p}%)</span></div><div class="prog"><div class="pf" style="width:${p}%;background:${a.d}"></div></div></div>`; }).join('')}
+    </div>
+    <div class="card">
+      <div class="ct">⚠️ Workload Alerts</div>
+      ${teachers.filter(t => t.workload >= 7).map(t => `<div style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;margin-bottom:8px;background:${t.workload >= 8 ? '#fff1f2' : '#fffbeb'};border:1px solid ${t.workload >= 8 ? '#fecdd3' : '#fde68a'}"><span style="font-size:18px">${t.workload >= 8 ? '🔥' : '⚠️'}</span><div style="flex:1"><div style="font-weight:700;font-size:13px;color:var(--tx)">${t.name}</div><div style="font-size:11px;color:#64748b">${t.dept} · Workload: ${t.workload}/10</div></div><span style="font-size:11px;font-weight:800;color:${t.workload >= 8 ? '#e11d48' : '#d97706'}">${t.workload >= 8 ? 'CRITICAL' : 'HIGH'}</span></div>`).join('')}
+      ${teachers.filter(t => t.workload >= 7).length === 0 ? '<p style="color:#94a3b8;font-size:13px">All teachers within safe workload 🎉</p>' : ''}
+    </div>
+  </div>`;
+    }
+    async function setAvail(id, val) {
+      teachers = teachers.map(t => t.id === id ? { ...t, avail: val } : t);
+      const t = teachers.find(t => t.id === id);
+      const n = { id: Date.now(), msg: `${t.name} is now ${AC[val].l}.`, type: 'info', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), read: false };
+      notifs.unshift(n);
+      toast(`${t.name} → ${AC[val].l}`, AC[val].d);
+      await persist('teachers', t);
+      await persist('notifications', n);
+      updDot(); renderNav(); nav('availability');
+    }
+    function filtAvail(status) {
+      document.querySelectorAll('.apr').forEach(r => {
+        if (status === 'all') { r.style.display = 'flex'; return; }
+        const id = parseInt(r.id.replace('avr-', ''));
+        const t = teachers.find(x => x.id === id);
+        r.style.display = !t || t.avail === status ? 'flex' : 'none';
+      });
+    }
+
+    // ───── TEACHERS ─────
+    let addTch = false;
+    function rTeach(el) {
+      const q = (document.getElementById('tcSearch')?.value || '').toLowerCase();
+      const fl = teachers.filter(t => !q || t.name.toLowerCase().includes(q) || t.subjects.join(' ').toLowerCase().includes(q) || t.dept.toLowerCase().includes(q));
+      el.innerHTML = `
+  <div class="fb" style="margin-bottom:18px">
+    <div><div class="stitle">👩‍🏫 Teacher Database</div><div class="ssub">${teachers.length} total · ${teachers.filter(t => t.avail === 'available').length} available · ${teachers.filter(t => t.avail === 'busy').length} busy · ${teachers.filter(t => t.avail === 'on-leave').length} on leave</div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div style="position:relative;flex:1;min-width:180px"><span style="position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none">🔍</span><input id="tcSearch" class="fi2" placeholder="Search name, subject, dept..." oninput="nav('teachers')" style="padding-left:34px"/></div>
+      ${role === 'admin' ? `<button class="btn bp" onclick="tglAddTch()">➕ Add Teacher</button>` : ''}
+    </div>
+  </div>
+  <div id="addTchF" style="${addTch ? '' : 'display:none'}margin-bottom:18px">
+    <div class="card" style="border:2px solid rgba(124,58,237,.2)">
+      <div style="font-weight:800;color:#7c3aed;margin-bottom:14px;font-size:15px">➕ Add New Teacher</div>
+      <div class="fg">
+        ${[['nN', 'Full Name', 'Dr. Jane Smith', 'text'], ['nS', 'Subjects (comma-sep.)', 'Math, Physics', 'text'], ['nD', 'Department', 'Science', 'text'], ['nE', 'Email', 'jane@school.edu', 'email'], ['nP', 'Phone', '+91-00000-00000', 'text'], ['nX', 'Experience (yrs)', '5', 'number']].map(([id, l, ph, tp]) => `<div><label class="fl">${l}</label><input id="${id}" class="fi2" placeholder="${ph}" type="${tp}"/></div>`).join('')}
+      </div>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <button class="btn bp" onclick="saveTch()">💾 Save Teacher</button>
+        <button class="btn bg" onclick="tglAddTch()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="tgrid">
+    ${fl.map(t => {
+        const a = AC[t.avail];
+        const wc = t.workload >= 8 ? '#e11d48' : t.workload >= 6 ? '#d97706' : '#059669';
+        return `<div class="tcard">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="avatar" style="width:46px;height:46px;font-size:15px;background:${avbg(t.name)};box-shadow:0 4px 12px ${avbg(t.name)}44">${ini(t.name)}</div>
+            <div>
+              <div style="font-weight:800;color:var(--tx);font-size:14px;line-height:1.2">${t.name}</div>
+              <div style="color:#94a3b8;font-size:11px;margin-top:1px">${t.dept} · ${t.exp}y · ⭐${t.rating}</div>
+            </div>
+          </div>
+          <select class="asel" style="background:${a.bg};color:${a.c}" onchange="chAvail(${t.id},this.value)">${Object.entries(AC).map(([v, c]) => `<option value="${v}" ${v === t.avail ? 'selected' : ''}>${c.l}</option>`).join('')}</select>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">${t.subjects.map(s => `<span class="badge" style="background:${(SC[s] || '#6366f1')}15;color:${SC[s] || '#6366f1'}">${s}</span>`).join('')}</div>
+        <div style="font-size:11px;color:#94a3b8;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+          <span>📧 ${t.email}</span>
+          <button class="btn bg" style="font-size:10px;padding:4px 10px" onclick="const box=this.closest('.tcard').querySelector('.sched-box'); box.innerHTML=box.innerHTML?'':rPersonalTT('${t.name}','Tuesday')">🗓️ Schedule</button>
+        </div>
+        <div class="sched-box"></div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:11px;color:#64748b;font-weight:600">Workload</span><span style="font-size:11px;font-weight:800;color:${wc}">${t.workload}/10 ${t.workload >= 8 ? '⚠️' : ''}</span></div>
+          <div class="prog"><div class="pf" style="width:${t.workload * 10}%;background:${wc}"></div></div>
+        </div>
+      </div>`;
+      }).join('')}
+    ${fl.length === 0 ? '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#94a3b8">No teachers match your search.</div>' : ''}
+  </div>`;
+    }
+    function tglAddTch() { addTch = !addTch; nav('teachers'); }
+    async function chAvail(id, val) {
+      teachers = teachers.map(t => t.id === id ? { ...t, avail: val } : t);
+      const t = teachers.find(x => x.id === id);
+      const n = { id: Date.now(), msg: `${t?.name} → ${AC[val].l}`, type: 'info', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), read: false };
+      notifs.unshift(n);
+      toast('Status updated', AC[val].d);
+      await persist('teachers', t);
+      await persist('notifications', n);
+      updDot(); renderNav();
+    }
+    async function saveTch() {
+      const name = document.getElementById('nN')?.value?.trim();
+      const sj = document.getElementById('nS')?.value?.trim();
+      if (!name || !sj) { toast('⚠️ Name and Subjects required', '#e11d48'); return; }
+      const newItem = { id: Date.now(), name, subjects: sj.split(',').map(s => s.trim()), dept: document.getElementById('nD')?.value || 'General', email: document.getElementById('nE')?.value || '', phone: document.getElementById('nP')?.value || '', exp: parseInt(document.getElementById('nX')?.value) || 1, avail: 'available', workload: 5, rating: 4.0 };
+      teachers.push(newItem);
+      const n = { id: Date.now(), msg: `New teacher ${name} added.`, type: 'success', time: 'Just now', read: false };
+      notifs.unshift(n);
+      toast('✅ Teacher added!', '#059669'); addTch = false;
+      await persist('teachers', newItem);
+      await persist('notifications', n);
+      updDot(); renderNav(); nav('teachers');
+    }
+
+    // ───── SUBSTITUTES ─────
+    function rSubs(el) {
+      el.innerHTML = `
+  <div style="margin-bottom:18px"><div class="stitle">🔄 Smart Substitute Engine</div><div class="ssub">AI automatically finds & assigns the best substitute when staff are absent</div></div>
+  <div style="padding:13px 16px;background:#f0fdf4;border-radius:12px;border:1.5px solid rgba(34,197,94,.2);margin-bottom:18px;font-size:13px;color:#15803d;font-weight:600;display:flex;align-items:center;gap:8px"><span style="font-size:20px">✅</span><span><strong>Auto-Assignment Active:</strong> When absence is reported or leave is approved, AI instantly analyzes availability & assigns the best teacher match by subject, experience & workload.</span></div>
+  <div style="padding:13px 16px;background:#f8f7ff;border-radius:12px;border:1.5px solid rgba(124,58,237,.2);margin-bottom:18px;font-size:13px;color:#7c3aed;font-weight:600;display:flex;align-items:center;gap:8px"><span style="font-size:20px">🤖</span><span>You can still click <strong>AI Suggest</strong> on any absence to manually review & customize recommendations</span></div>
+  <div class="card" style="margin-bottom:18px">
+    <div class="ct">➕ Report New Absence</div>
+    <div class="fg">
+      <div><label class="fl">Absent Teacher</label><select id="abT" class="fi2"><option value="">Select teacher...</option>${teachers.map(t => `<option value="${t.id}">${t.name}</option>`).join('')}</select></div>
+      <div><label class="fl">Subject</label><input id="abS" class="fi2" placeholder="e.g. Mathematics"/></div>
+      <div><label class="fl">Class</label><select id="abC" class="fi2">${ALL_CLASSES.map(c => `<option>${c}</option>`).join('')}</select></div>
+      <div><label class="fl">Period</label><select id="abP" class="fi2">${[1, 2, 3, 4, 5, 6, 7, 8].map(p => `<option value="${p}">Period ${p}</option>`).join('')}</select></div>
+      <div><label class="fl">Date</label><input id="abD" type="date" class="fi2" value="2026-03-17"/></div>
+      <div style="display:flex;align-items:flex-end"><button class="btn bd" style="width:100%" onclick="repAbs()">📋 Report Absence (AI will auto-assign)</button></div>
+    </div>
+  </div>
+  <div id="absList"></div>`;
+      drawAbsList();
+    }
+    function drawAbsList() {
+      const el = document.getElementById('absList'); if (!el) return;
+      el.innerHTML = absences.length === 0 ? '<div style="text-align:center;padding:30px;color:#94a3b8">No absences recorded yet.</div>' : absences.map(ab => {
+        const sg = ab.aiSug, subT = ab.subId ? teachers.find(t => t.id === ab.subId) : null;
+        let covBadge = '';
+        if (ab.subsAssigned && Object.keys(ab.subsAssigned).length > 0) {
+          covBadge = `<div style="display:inline-flex;align-items:center;gap:5px;padding:4px 12px;background:#f0fdf4;border-radius:8px;margin-top:6px;font-weight:800;color:#15803d;font-size:13px">✅ Assigned: ${Object.entries(ab.subsAssigned).map(([p, n]) => `${p} - ${n}`).join(', ')}</div>`;
+        } else if (subT) {
+          covBadge = `<div style="display:inline-flex;align-items:center;gap:5px;padding:4px 12px;background:#f0fdf4;border-radius:8px;margin-top:6px;font-weight:800;color:#15803d;font-size:13px">✅ Substitute: ${subT.name}</div>`;
+        }
+
+        let statusUI = '';
+        if (ab.status === 'pending') {
+          statusUI = `<div style="padding:6px 16px;border-radius:99px;background:#fef3c7;color:#d97706;font-weight:800;font-size:12px;display:inline-flex;align-items:center;gap:6px"><span>⚙️</span> Processing...</div>`;
+          // Auto trigger resolving it immediately if it somehow got stuck as pending
+          setTimeout(() => { if (!ab.aiLoad) autoAssignMultiPeriods(ab.id, [{ period: ab.period, cls: ab.cls, subject: ab.subject }]); }, 100);
+          ab.aiLoad = true; // prevent multi-trigger
+        } else {
+          statusUI = `<span style="padding:6px 16px;border-radius:99px;background:#d1fae5;color:#059669;font-weight:800;font-size:12px">COVERED ✓</span>`;
+        }
+
+        return `<div class="acard" style="border-left-color:${ab.status === 'pending' ? '#d97706' : '#059669'}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:28px">${ab.status === 'pending' ? '🔴' : '✅'}</span>
+          <div>
+            <div style="font-weight:900;font-size:15px;color:var(--tx)">${ab.teacher}</div>
+            <div style="color:#64748b;font-size:12px;margin-top:2px">${ab.subject} · Class ${ab.cls} · Period ${ab.period} · ${ab.date}</div>
+            ${covBadge}
+          </div>
+        </div>
+        ${statusUI}
+      </div>
+      <!-- Old AI Suggestion block removed entirely as requested by user! -->
+    </div>`;
+      }).join('');
+    }
+    async function repAbs() {
+      const tid = document.getElementById('abT')?.value;
+      const subj = document.getElementById('abS')?.value?.trim();
+      if (!tid || !subj) { toast('⚠️ Select teacher and enter subject', '#e11d48'); return; }
+      const t = teachers.find(x => x.id === parseInt(tid));
+      const absenceId = Date.now();
+      const periodNum = parseInt(document.getElementById('abP')?.value);
+      const clsName = document.getElementById('abC')?.value;
+
+      const newItem = { id: absenceId, teacherId: parseInt(tid), teacher: t?.name || '', date: document.getElementById('abD')?.value, subject: subj, period: periodNum, cls: clsName, status: 'pending', subId: null, subsAssigned: {}, aiSug: null, aiLoad: false };
+      absences.unshift(newItem);
+
+      const n = { id: Date.now(), msg: `🚨 ABSENCE: ${t?.name} — ${subj} · Auto-assigning...`, type: 'alert', time: 'Just now', read: false };
+      notifs.unshift(n);
+      toast('Absence reported — Assigning substitute...', '#d97706');
+      await persist('absences', newItem);
+      await persist('notifications', n);
+      updDot(); renderNav();
+      document.getElementById('abT').value = ''; document.getElementById('abS').value = '';
+      drawAbsList();
+
+      setTimeout(() => {
+        if (cfg.autoAI !== false) {
+          autoAssignMultiPeriods(absenceId, [{ period: periodNum, cls: clsName, subject: subj }]);
+        }
+      }, 500);
+    }
+    async function aiSuggest(aid) {
+      const ab = absences.find(a => a.id === aid); if (!ab) return;
+      absences = absences.map(a => a.id === aid ? { ...a, aiLoad: true } : a); drawAbsList();
+
+      const dayMapping = { '2026-03-17': 'Tuesday', '2026-03-18': 'Wednesday', '2026-03-19': 'Thursday', '2026-03-20': 'Friday', '2026-03-21': 'Saturday' };
+      const dayName = dayMapping[ab.date] || 'Tuesday';
+      const ttRow = TT[dayName] ? TT[dayName].find(r => r.p === ab.period) : null;
+
+      const avl = teachers.filter(t => {
+        if (t.avail !== 'available' || t.id === ab.teacherId) return false;
+        if (absences.some(a => a.teacherId === t.id && a.date === ab.date)) return false;
+        if (ttRow) {
+          for (let c of ALL_CLASSES) {
+            if (ttRow[c] && (ttRow[c].tc === t.name || ttRow[c].tc === t.name + '(s)')) return false;
+          }
+        }
+        return true;
+      });
+
+      if (avl.length === 0) { absences = absences.map(a => a.id === aid ? { ...a, aiLoad: false, aiSug: { teacherName: 'No teachers available', reason: 'All available teachers are busy or on leave. Consider an external substitute or reschedule.', confidence: 'Low', teacherId: null } } : a); drawAbsList(); return; }
+      try {
+        const pr = 'Pick the BEST substitute for this absence:\n\nABSENCE: ' + ab.teacher + ' absent for ' + ab.subject + ', Class ' + ab.cls + ', Period ' + ab.period + '\n\nAVAILABLE TEACHERS:\n' + avl.map(t => 'ID:' + t.id + ' ' + t.name + ' — subjects=[' + t.subjects.join(', ') + '], workload=' + t.workload + '/10, exp=' + t.exp + 'yrs, rating=' + t.rating).join('\n') + '\n\nRespond ONLY in valid JSON (no markdown):\n{"teacherId":<number>,"teacherName":"<full name>","reason":"<2 sentence explanation>","confidence":"High","altId":<number or null>,"altName":"<name or null>"}';
+        const d = await claude([{ role: 'user', content: pr }], null, 600, false);
+        const r = JSON.parse(extractJSON(d.content?.[0]?.text || '{}'));
+        absences = absences.map(a => a.id === aid ? { ...a, aiLoad: false, aiSug: r } : a);
+      } catch (e) {
+        let m = 'Could not get AI suggestion. Try again.';
+        if (e.message === 'NO_KEY') m = '🔑 No API key set — click the banner at the top.';
+        else if (e.message === 'BAD_KEY') m = '❌ Invalid API key — update it in the banner.';
+        else if (e.message.startsWith('BOTH_FAILED')) m = '⚠️ Both Groq & Gemini failed. Check your API keys or network connection.';
+        else m = '⚠️ ' + e.message;
+        absences = absences.map(a => a.id === aid ? { ...a, aiLoad: false, aiSug: { teacherName: 'Error', reason: m, confidence: 'Low', teacherId: null } } : a);
+      }
+      drawAbsList();
+    }
+    async function assignSub(aid, tid) {
+      const ab = absences.find(a => a.id === aid);
+      const tc = teachers.find(t => t.id === tid);
+      if (!ab || !tc) return;
+
+      absences = absences.map(a => a.id === aid ? { ...a, status: 'assigned', subId: tid, aiSug: null } : a);
+      teachers = teachers.map(t => t.id === tid ? { ...t, workload: Math.min(10, t.workload + 1) } : t);
+
+      // 1. Update Global TT Object
+      // Map the date to day (Mock maps 2026-03-17 to Tuesday)
+      const dayMapping = { '2026-03-17': 'Tuesday', '2026-03-18': 'Wednesday', '2026-03-19': 'Thursday', '2026-03-20': 'Friday', '2026-03-21': 'Saturday' };
+      const currentDayName = dayMapping[ab.date] || 'Tuesday';
+
+      if (TT[currentDayName]) {
+        const row = TT[currentDayName].find(r => r.p === ab.period);
+        if (row && row[ab.cls]) {
+          row[ab.cls].tc = `${tc.name}(s)`;
+          row[ab.cls].s = ab.subject; // Update subject too if needed
+        }
+      }
+
+      // 2. Create Notification
+      const n = { id: Date.now(), msg: `🔔 @${tc.name}: You are assigned as substitute for ${ab.subject} (Class ${ab.cls})`, type: 'success', time: 'Just now', read: false };
+      notifs.unshift(n);
+      toast(`✅ Substitution set on Timetable: ${tc.name}`, '#059669');
+
+      // 3. Persist everything
+      await persist('absences', { ...ab, status: 'assigned', subId: tid });
+      await persist('teachers', teachers.find(t => t.id === tid));
+      await persist('notifications', n);
+      // Persist the entire timetable row since it's updated
+      const updatedRow = TT[currentDayName].find(r => r.p === ab.period);
+      // Construct the database model match for the row
+      const dbRow = { day: currentDayName, p: ab.period, t: updatedRow.t, data: {} };
+      const clsList = ['10-A', '10-B', '10-C', '11-A', '11-B', '11-C', '12-A', '12-B', '12-C', '9-A', '9-B', '9-C', '8-A', '8-B', '8-C', '7-A', '7-B', '7-C'];
+      clsList.forEach(c => { if (updatedRow[c]) dbRow.data[c] = updatedRow[c]; });
+      await persist('timetable', dbRow);
+
+      updDot(); renderNav(); drawAbsList();
+    }
+
+    // ───── TIMETABLE ─────
+    let ttD = 'Tuesday';
+    function rTT(day) {
+      ttD = day || ttD || 'Monday';
+      const c = document.getElementById('content');
+      const rows = TT[ttD] || [];
+      console.log(`Rendering Timetable for ${ttD}:`, rows.length, "rows found");
+      const cls = ALL_CLASSES;
+      c.innerHTML = `<div class="fu"><div style="margin-bottom:16px"><div class="stitle">📅 Weekly Timetable</div><div class="ssub">Full schedule · Color-coded by subject</div></div>
+  <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+    ${['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map(d => `<button class="dtab${d === ttD ? ' on' : ''}" onclick="rTT('${d}')">${d}</button>`).join('')}
+  </div>
+  <div class="card" style="padding:0;overflow:hidden"><div style="overflow-x:auto"><table class="tta">
+    <thead><tr style="background:linear-gradient(135deg,#1e1b4b,#3730a3)"><th style="min-width:110px">Period / Time</th>${cls.map(cl => `<th style="min-width:150px">Class ${cl}</th>`).join('')}</tr></thead>
+    <tbody>${rows.map((r, i) => `<tr style="background:${i % 2 === 0 ? 'white' : '#fafbff'}"><td style="padding:10px 14px"><div style="font-weight:800;color:#7c3aed;font-size:15px">P${r.p}</div><div style="color:#94a3b8;font-size:11px;margin-top:1px">${r.t}</div></td>${cls.map(cl => { const cell = r[cl]; if (!cell) return '<td></td>'; const sc = SC[cell.s] || '#6366f1'; return `<td style="padding:8px 10px"><div class="ttc" style="background:${sc}12;border-left-color:${sc}"><div class="ts" style="color:${sc}">${cell.s}</div><div class="tt2">${cell.tc}</div></div></td>`; }).join('')}</tr>`).join('')}</tbody>
+  </table></div></div>
+  <div class="card" style="margin-top:16px"><div class="ct">📊 ${ttD} Summary</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px">${cls.map(cl => `<div style="padding:12px 14px;border-radius:12px;background:#f8fafc;border:1px solid var(--gb);text-align:center"><div style="font-weight:900;font-size:26px;color:#7c3aed">${rows.length}</div><div style="font-size:12px;color:#64748b;font-weight:600;margin-top:2px">Class ${cl}</div><div style="font-size:11px;color:#059669;margin-top:2px">All covered ✓</div></div>`).join('')}</div></div>
+  </div>`;
+      document.getElementById('ttl').textContent = '📅 Timetable';
+    }
+
+    // ───── ANALYTICS ─────
+    function rAnal(el) {
+      const mx = Math.max(...MN.map(m => m.a));
+      const pts = MN.map((m, i) => { const x = i * (300 / 6); const pct = m.c / m.a * 100; const y = 130 - ((pct - 80) / 20) * 110; return { x, y: Math.max(5, y), pct: Math.round(pct) }; });
+      const ld = pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x + ',' + p.y).join(' ');
+      const fd = ld + ' L' + pts[pts.length - 1].x + ',130 L0,130 Z';
+      el.innerHTML = `
+  <div style="margin-bottom:18px"><div class="stitle">📈 Analytics Dashboard</div><div class="ssub">Insights on absences, coverage, workload & AI predictions</div></div>
+  <div class="g2" style="margin-bottom:16px">
+    <div class="card"><div class="ct">📊 Monthly Absence vs Coverage</div>
+      <div class="cbar">${MN.map(m => `<div class="cg"><div style="display:flex;align-items:flex-end;gap:2px;height:120px"><div class="cb" style="background:#e11d48;height:${Math.round(m.a / mx * 100)}%;width:13px"></div><div class="cb" style="background:#059669;height:${Math.round(m.c / mx * 100)}%;width:13px"></div></div><div class="clbl">${m.m}</div></div>`).join('')}</div>
+      <div style="display:flex;gap:12px;margin-top:6px"><span style="font-size:11px;color:#64748b;display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:10px;height:10px;background:#e11d48;border-radius:2px"></span>Absent</span><span style="font-size:11px;color:#64748b;display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:10px;height:10px;background:#059669;border-radius:2px"></span>Covered</span></div>
+    </div>
+    <div class="card"><div class="ct">📈 Coverage Rate Trend</div>
+      <svg width="100%" height="145" viewBox="0 0 300 135" style="overflow:visible">
+        <defs><linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7c3aed" stop-opacity=".15"/><stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/></linearGradient></defs>
+        <path d="${fd}" fill="url(#gr1)"/><path d="${ld}" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-linejoin="round"/>
+        ${pts.map(p => `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="#7c3aed"/><text x="${p.x}" y="${p.y - 9}" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="800">${p.pct}%</text>`).join('')}
+        ${MN.map((m, i) => `<text x="${i * (300 / 6)}" y="133" text-anchor="middle" font-size="9" fill="#94a3b8" font-weight="600">${m.m}</text>`).join('')}
+      </svg>
+    </div>
+  </div>
+  <div class="g2" style="margin-bottom:16px">
+    <div class="card"><div class="ct">🏆 Top Substitute Teachers</div>
+      ${[['Dr. Sarah Johnson', 8, '#7c3aed'], ['Ms. Priya Sharma', 5, '#0891b2'], ['Mr. Alex Thompson', 4, '#059669'], ['Mr. James Brown', 3, '#d97706'], ['Ms. Emily Chen', 2, '#6366f1']].map(([n, c, cl]) => `<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:13px;font-weight:700;color:var(--tx)">${n}</span><span style="font-size:12px;font-weight:800;color:${cl}">${c}×</span></div><div class="prog"><div class="pf" style="width:${c * 11}%;background:${cl}"></div></div></div>`).join('')}
+    </div>
+    <div class="card"><div class="ct">⚡ Teacher Workload</div>
+      ${[...teachers].sort((a, b) => b.workload - a.workload).map(t => { const wc = t.workload >= 8 ? '#e11d48' : t.workload >= 6 ? '#d97706' : '#059669'; return `<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:12px;font-weight:700;color:var(--tx)">${t.name.split(' ').slice(-1)[0]}</span><span style="font-size:12px;font-weight:800;color:${wc}">${t.workload}/10 ${t.workload >= 8 ? '🔥' : ''}</span></div><div class="prog"><div class="pf" style="width:${t.workload * 10}%;background:${wc}"></div></div></div>`; }).join('')}
+    </div>
+  </div>
+  <div class="g2" style="margin-bottom:16px">
+    <div class="card"><div class="ct">🏫 Department Breakdown</div>
+      ${[['Science', '🔬', 3, 18, '#e11d48'], ['Humanities', '📚', 2, 12, '#d97706'], ['Technology', '💻', 1, 4, '#6366f1'], ['Languages', '🌍', 1, 8, '#0891b2'], ['Sports', '⚽', 1, 3, '#059669']].map(([d, ic, tc, ab, c]) => `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-radius:10px;margin-bottom:7px;background:${c}0e;border-left:3px solid ${c}"><div style="display:flex;align-items:center;gap:7px"><span>${ic}</span><span style="font-weight:700;color:var(--tx);font-size:13px">${d}</span></div><div style="display:flex;gap:12px;font-size:12px"><span style="color:#64748b">👩‍🏫 ${tc}</span><span style="color:${c};font-weight:800">${ab} abs</span></div></div>`).join('')}
+    </div>
+    <div class="card"><div class="ct">📅 Day-wise Pattern</div>
+      ${[['Monday', 4, '#e11d48'], ['Tuesday', 7, '#d97706'], ['Wednesday', 3, '#6366f1'], ['Thursday', 5, '#0891b2'], ['Friday', 9, '#7c3aed']].map(([d, n, c]) => `<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:12px;font-weight:700;color:var(--tx)">${d}</span><span style="font-size:12px;font-weight:800;color:${c}">${n} avg</span></div><div class="prog"><div class="pf" style="width:${n * 9}%;background:${c}"></div></div></div>`).join('')}
+      <div style="font-size:11px;color:#94a3b8;margin-top:8px">⚠️ Fridays have 3× more absences — pre-assign substitutes</div>
+    </div>
+  </div>
+  <div class="ib"><div style="font-weight:900;font-size:16px;color:white">🤖 AI Predictions & Hiring Insights</div>
+    <div class="ig">
+      ${[['📅', 'High absences predicted next Monday (3–4). Pre-assign substitutes today.', '#f59e0b'], ['🧑‍🔬', 'Science dept critically short — highest absence & shortage frequency. Hire 1 teacher.', '#f43f5e'], ['📊', 'March coverage 86% — below your 90% target. 2 classes still uncovered.', '#60a5fa'], ['🔥', 'Mr. Raj Kumar at burnout risk (workload 8/10). Recommend workload reduction.', '#a78bfa'], ['📈', 'October had 100% coverage. Key: substitutes pre-confirmed every Sunday.', '#34d399'], ['💰', 'Hiring 1 Chemistry teacher could save ~₹1.2L/year in substitute costs.', '#f9a8d4']].map(([ic, txt, col]) => `<div class="ic"><div style="font-size:22px;margin-bottom:7px">${ic}</div><div style="font-size:12px;color:#cbd5e1;line-height:1.65">${txt}</div></div>`).join('')}
+    </div>
+  </div>`;
+    }
+
+    // ───── CHAT ─────
+    function rChat(el) {
+      el.style.cssText = 'display:flex;flex-direction:column;height:calc(100vh - 130px);min-height:440px';
+      const questions = [
+        'Who is free for Math tomorrow?',
+        'Which teacher needs a break?',
+        'Workload analysis',
+        'Hiring needs?',
+        'Schedule conflicts',
+        'Predict next week',
+        'Best substitute?',
+        'Who can cover Chemistry 10-A tomorrow?',
+        'What is the current teacher workload?',
+        'Are there any uncovered absences today?'
+      ];
+      el.innerHTML = `
+  <div style="margin-bottom:12px"><div class="stitle">🤖 AI School Assistant</div><div class="ssub">Powered by Groq & Gemini AI · Ask about teachers, absences, timetables, or predictions</div></div>
+  <div style="flex:1;overflow-y:auto;padding:14px;background:#f8fafc;border-radius:16px;border:1.5px solid var(--gb);display:flex;flex-direction:column;gap:8px;min-height:0" id="ca"><div id="cm"></div></div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 6px">
+    ${questions.map(q => `<span class="chip" onclick="sqk('${q}')">${q}</span>`).join('')}
+  </div>
+  <div style="display:flex;gap:8px">
+    <input id="ci" class="fi2" placeholder="Ask the AI... e.g. 'Who can cover Chemistry 10-A tomorrow?'" style="flex:1;padding:12px 16px;border:2px solid var(--gb);border-radius:12px;font-size:13px" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"/>
+    <button class="btn bp" onclick="sendMsg()" style="padding:12px 22px;border-radius:12px">Send ➤</button>
+  </div>`;
+      drawChat();
+    }
+    function drawChat() {
+      const el = document.getElementById('cm'); if (!el) return;
+      el.innerHTML = chatH.map(m => `<div class="msg ${m.role === 'user' ? 'u' : 'b'}" style="margin-bottom:2px"><div class="mav" style="background:${m.role === 'user' ? 'linear-gradient(135deg,#0891b2,#06b6d4)' : 'linear-gradient(135deg,#6366f1,#7c3aed)'}">${m.role === 'user' ? (role === 'admin' ? '👑' : role === 'coordinator' ? '🎯' : '👩‍🏫') : '🤖'}</div><div class="mbub">${m.content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\n/g, '<br>')}</div></div>`).join('') + (chatLoad ? `<div class="msg b"><div class="mav" style="background:linear-gradient(135deg,#6366f1,#7c3aed)">🤖</div><div class="mbub" style="background:white;color:var(--tx);border-bottom-left-radius:3px;box-shadow:0 2px 10px rgba(0,0,0,.07);display:flex;align-items:center;gap:5px;padding:14px 16px"><div class="d1" style="width:7px;height:7px;border-radius:50%;background:#7c3aed"></div><div class="d2" style="width:7px;height:7px;border-radius:50%;background:#7c3aed"></div><div class="d3" style="width:7px;height:7px;border-radius:50%;background:#7c3aed"></div></div></div>` : '');
+      const a = document.getElementById('ca'); if (a) a.scrollTop = a.scrollHeight;
+    }
+    function sqk(txt) { const inp = document.getElementById('ci'); if (inp) inp.value = txt; sendMsg(); }
+    async function sendMsg() {
+      if (chatLoad) return;
+      const inp = document.getElementById('ci');
+      const msg = inp?.value?.trim(); if (!msg) return;
+      inp.value = ''; chatH.push({ role: 'user', content: msg }); chatLoad = true; drawChat();
+      console.log('[CHAT] User message sent:', msg.substring(0, 50) + '...');
+      const sys = 'You are a smart AI assistant for EduAI Pro school management. Today is Tuesday March 17 2026.\nTEACHERS:\n' + teachers.map(t => '- ' + t.name + ' (' + t.dept + '): subjects=[' + t.subjects.join(', ') + '], avail=' + t.avail + ', exp=' + t.exp + 'yrs, workload=' + t.workload + '/10, rating=' + t.rating).join('\n') + '\nPENDING ABSENCES:\n' + (absences.filter(a => a.status === 'pending').map(a => '- ' + a.teacher + ' for ' + a.subject + ' Class ' + a.cls + ' P' + a.period + ' on ' + a.date).join('\n') || 'None') + '\nASSIGNED:\n' + (absences.filter(a => a.status === 'assigned').map(a => '- ' + a.teacher + ' covered by ' + (teachers.find(t => t.id === a.subId)?.name || '?')).join('\n') || 'None') + '\nBe concise, use bullet points and bold for key info. Consider: subject match, availability, workload, experience when suggesting substitutes.';
+      try {
+        console.log('[CHAT] Preparing API call with', chatH.length, 'messages');
+        const msgs = chatH.slice(-12).map(m => ({ role: m.role, content: m.content }));
+        const d = await claude(msgs, sys, 1000);
+        chatH.push({ role: 'assistant', content: d.content?.[0]?.text || 'Sorry, could not process that.' });
+        console.log('[CHAT] Response received successfully');
+      } catch (e) {
+        console.error('[CHAT] Error caught:', e.message);
+        let err = '⚠️ Connection error. Check your internet.';
+        if (e.message === 'NO_KEY') err = '🔑 No API key! Click the banner at the top to enter your Groq or Gemini API key.';
+        else if (e.message === 'BAD_KEY') err = '❌ Invalid API key. Get a new one from <a href="https://console.groq.com/api-keys" target="_blank" style="color:#7c3aed;text-decoration:underline">Groq</a> or <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#7c3aed;text-decoration:underline">Google AI Studio</a>.';
+        else if (e.message === 'NETWORK_ERROR') err = '📡 Network error. Check internet or try <a href="javascript:location.reload()" style="color:#7c3aed;text-decoration:underline">refresh</a>.';
+        else if (e.message.startsWith('BOTH_FAILED')) err = '🚫 Both Groq and Gemini failed to respond. <br><small style="opacity:.6">Details: ' + e.message.replace('BOTH_FAILED: ', '') + '</small><br>Please check your API keys or try again later.';
+        else if (e.message === 'QUOTA_EXCEEDED') err = '⚡ Rate limit exceeded. Please wait a moment and try again.';
+        else if (e.message === 'EMPTY_RESPONSE') err = '🔄 Empty response from API. Please try again.';
+        else if (e.message.includes('HTTP')) err = `⚠️ API Error: ${e.message}`;
+        chatH.push({ role: 'assistant', content: err });
+      }
+      chatLoad = false; drawChat();
+    }
+
+    // ───── NOTIFICATIONS ─────
+    function rNotifs(el) {
+      const tc = { alert: '#e11d48', success: '#059669', warning: '#d97706', info: '#0891b2' };
+      const ti = { alert: '🚨', success: '✅', warning: '⚠️', info: 'ℹ️' };
+      el.innerHTML = `
+  <div class="fb" style="margin-bottom:18px">
+    <div style="display:flex;align-items:center;gap:10px"><div class="stitle">🔔 Notifications</div>${unread() > 0 ? `<span style="background:#e11d48;color:white;border-radius:99px;padding:2px 12px;font-size:13px;font-weight:800">${unread()} new</span>` : ''}</div>
+    <div style="display:flex;gap:8px"><button class="btn bg" style="font-size:12px" onclick="markAll()">✓ Mark all read</button><button class="btn bg" style="font-size:12px" onclick="clearAll()">🗑 Clear all</button></div>
+  </div>
+  ${notifs.length === 0 ? '<div style="text-align:center;padding:40px;color:#94a3b8;font-size:14px">No notifications 🎉</div>' : ''}
+  ${notifs.map(n => `<div class="ni ${n.read ? '' : 'unread'}" style="border-left-color:${n.read ? 'var(--gb)' : tc[n.type]};opacity:${n.read ? .82 : 1}" onclick="markOne(${n.id})"><span style="font-size:22px">${ti[n.type]}</span><div style="flex:1"><div style="font-weight:${n.read ? 500 : 700};color:var(--tx);font-size:13px">${n.msg}</div><div style="color:#94a3b8;font-size:11px;margin-top:2px">${n.time}</div></div>${!n.read ? `<div class="ndot" style="background:${tc[n.type]}"></div>` : ''}</div>`).join('')}`;
+    }
+    async function markOne(id) {
+      notifs = notifs.map(n => n.id === id ? { ...n, read: true } : n);
+      const n = notifs.find(x => x.id === id);
+      await persist('notifications', n);
+      updDot(); renderNav(); nav('notifications');
+    }
+    async function markAll() {
+      notifs = notifs.map(n => ({ ...n, read: true }));
+      await fetch('/api/notifications/mark-all-read', { method: 'POST' });
+      updDot(); renderNav(); nav('notifications');
+    }
+    async function clearAll() {
+      notifs = [];
+      await fetch('/api/notifications/clear-all', { method: 'POST' });
+      updDot(); renderNav(); nav('notifications');
+    }
+
+    // ───── SETTINGS ─────
+    function rSettings(el) {
+      el.innerHTML = `
+  <div style="margin-bottom:18px"><div class="stitle">⚙️ Settings</div><div class="ssub">Customize EduAI Pro for your school</div></div>
+  <div class="ssr">
+    <div class="st">🔑 Groq API Key</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <input id="skIn" type="password" class="fi2" style="flex:1;min-width:300px" placeholder="gsk- or gsk_..." value="${AKEY}"/>
+      <button class="btn bp" onclick="skSave()">Save Key</button>
+      <button class="btn bg" onclick="const i=document.getElementById('skIn');i.type=i.type==='password'?'text':'password'">👁 Show</button>
+      <button class="btn bg" onclick="openApiModal();setTimeout(testAiConnection,100)">🔍 Test Connection</button>
+    </div>
+    <div style="margin-top:8px;font-size:12px;color:#94a3b8">Get free key at <a href="https://console.groq.com/api-keys" target="_blank" style="color:#7c3aed">console.groq.com/api-keys</a> · Stored in browser localStorage only</div>
+    <div style="margin-top:8px;padding:8px 12px;border-radius:8px;background:${AKEY ? '#f0fdf4' : '#fff7ed'};border:1px solid ${AKEY ? '#bbf7d0' : '#fed7aa'};font-size:12px;font-weight:700;color:${AKEY ? '#15803d' : '#c2410c'}">${AKEY ? '✅ API Key set — AI features enabled' : '⚠️ No API key — AI features disabled'}</div>
+  </div>
+  <div class="ssr">
+    <div class="st">🎨 Display</div>
+    <div class="sr"><div><div style="font-weight:700;font-size:14px;color:var(--tx)">🌙 Dark Mode</div><div style="font-size:12px;color:#94a3b8;margin-top:1px">Switch to dark theme for low-light environments</div></div><button class="tog ${darkMode ? 'on' : 'off'}" onclick="darkMode=!darkMode;applyDark(darkMode);nav('settings')"></button></div>
+    ${[['compact', 'Compact View', 'Smaller cards and tighter spacing']].map(([k, l, d]) => `<div class="sr"><div><div style="font-weight:700;font-size:14px;color:var(--tx)">${l}</div><div style="font-size:12px;color:#94a3b8;margin-top:1px">${d}</div></div><button class="tog ${cfg[k] ? 'on' : 'off'}" onclick="togCfg('${k}')"></button></div>`).join('')}
+  </div>
+  <div class="ssr">
+    <div class="st">🔔 Notification Settings</div>
+    ${[['notifs', 'Enable all notifications', 'Get notified about absences & assignments'], ['email', 'Email alerts', 'Send email to coordinators for new absences'], ['sound', 'Sound alerts', 'Play sound when absence is reported'], ['autoAI', 'Auto AI Suggest', 'Automatically run AI on new absences']].map(([k, l, d]) => `<div class="sr"><div><div style="font-weight:700;font-size:14px;color:var(--tx)">${l}</div><div style="font-size:12px;color:#94a3b8;margin-top:1px">${d}</div></div><button class="tog ${cfg[k] ? 'on' : 'off'}" onclick="togCfg('${k}')"></button></div>`).join('')}
+  </div>
+  <div class="ssr">
+    <div class="st">📊 School Targets</div>
+    <div class="fg">
+      <div><label class="fl">Coverage Target (%)</label><input type="number" class="fi2" value="${cfg.target}" min="50" max="100" onchange="cfg.target=parseInt(this.value);toast('Target updated','#059669')"/></div>
+      <div><label class="fl">Max Safe Workload</label><input type="number" class="fi2" value="${cfg.maxWL}" min="1" max="10" onchange="cfg.maxWL=parseInt(this.value);toast('Workload limit updated','#059669')"/></div>
+    </div>
+  </div>
+  <div class="ssr">
+    <div class="st">� Password Management</div>
+    <div style="margin-bottom:14px">
+      <div style="font-weight:700;font-size:13px;color:var(--tx);margin-bottom:8px">Change Your Password</div>
+      <div style="display:flex;gap:8px;flex-direction:column;margin-bottom:10px">
+        <div style="display:flex;gap:6px;align-items:center">
+          <input id="cpOld" type="password" class="fi2" placeholder="Current password" style="flex:1"/>
+          <button style="background:var(--gb);border:1px solid var(--gb);border-radius:8px;padding:8px 10px;color:#64748b;cursor:pointer;font-size:14px;min-width:40px;transition:all .2s" onclick="togglePass('cpOld')" title="Show/Hide">👁</button>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <input id="cpNew" type="password" class="fi2" placeholder="New password" style="flex:1"/>
+          <button style="background:var(--gb);border:1px solid var(--gb);border-radius:8px;padding:8px 10px;color:#64748b;cursor:pointer;font-size:14px;min-width:40px;transition:all .2s" onclick="togglePass('cpNew')" title="Show/Hide">👁</button>
+        </div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <input id="cpConf" type="password" class="fi2" placeholder="Confirm new password" style="flex:1"/>
+          <button style="background:var(--gb);border:1px solid var(--gb);border-radius:8px;padding:8px 10px;color:#64748b;cursor:pointer;font-size:14px;min-width:40px;transition:all .2s" onclick="togglePass('cpConf')" title="Show/Hide">👁</button>
+        </div>
+        <button class="btn bp" style="width:100%" onclick="changeOwnPassword()">🔐 Change Password</button>
+      </div>
+    </div>
+  </div>
+  ${role === 'admin' ? `<div class="ssr">
+    <div class="st">👥 Manage Users & Passwords</div>
+    <div style="margin-bottom:16px">
+      <div style="font-weight:700;font-size:13px;color:var(--tx);margin-bottom:8px">Create Coordinator</div>
+      <div style="display:flex;gap:8px;flex-direction:column;margin-bottom:12px">
+        <input id="ncU" type="text" class="fi2" placeholder="Username (e.g. coord1)"/>
+        <div style="display:flex;gap:6px;align-items:center">
+          <input id="ncP" type="password" class="fi2" placeholder="Password" style="flex:1"/>
+          <button style="background:var(--gb);border:1px solid var(--gb);border-radius:8px;padding:8px 10px;color:#64748b;cursor:pointer;font-size:14px;min-width:40px;transition:all .2s" onclick="togglePass('ncP')" title="Show/Hide">👁</button>
+        </div>
+        <input id="ncN" type="text" class="fi2" placeholder="Full name"/>
+        <button class="btn bs" style="width:100%" onclick="createUser('coordinator')">➕ Create Coordinator</button>
+      </div>
+    </div>
+    <div style="margin-bottom:16px;padding-top:16px;border-top:1px solid var(--gb)">
+      <div style="font-weight:700;font-size:13px;color:var(--tx);margin-bottom:8px">Create Teacher</div>
+      <div style="display:flex;gap:8px;flex-direction:column;margin-bottom:12px">
+        <input id="ntU" type="text" class="fi2" placeholder="Username (e.g. teacher1)"/>
+        <div style="display:flex;gap:6px;align-items:center">
+          <input id="ntP" type="password" class="fi2" placeholder="Password" style="flex:1"/>
+          <button style="background:var(--gb);border:1px solid var(--gb);border-radius:8px;padding:8px 10px;color:#64748b;cursor:pointer;font-size:14px;min-width:40px;transition:all .2s" onclick="togglePass('ntP')" title="Show/Hide">👁</button>
+        </div>
+        <input id="ntN" type="text" class="fi2" placeholder="Full name"/>
+        <button class="btn bs" style="width:100%" onclick="createUser('teacher')">➕ Create Teacher</button>
+      </div>
+    </div>
+    <div style="padding-top:16px;border-top:1px solid var(--gb)">
+      <div style="font-weight:700;font-size:13px;color:var(--tx);margin-bottom:8px">Reset User Password</div>
+      <div style="display:flex;gap:8px;flex-direction:column">
+        <select id="resetUserRole" class="fi2" onchange="updateUserList()">
+          <option value="coordinator">Coordinator</option>
+          <option value="teacher">Teacher</option>
+        </select>
+        <select id="resetUser" class="fi2" placeholder="Select user...">
+          <option value="">Select user...</option>
+        </select>
+        <div style="display:flex;gap:6px;align-items:center">
+          <input id="resetPass" type="password" class="fi2" placeholder="New password" style="flex:1"/>
+          <button style="background:var(--gb);border:1px solid var(--gb);border-radius:8px;padding:8px 10px;color:#64748b;cursor:pointer;font-size:14px;min-width:40px;transition:all .2s" onclick="togglePass('resetPass')" title="Show/Hide">👁</button>
+        </div>
+        <button class="btn bd" style="width:100%" onclick="resetUserPassword()">🔑 Reset Password</button>
+      </div>
+    </div>
+  </div>`: ``}
+  <div class="ssr">
+    <div class="st">�👤 Account</div>
+    <div class="sr"><div><div style="font-weight:700;font-size:14px;color:var(--tx)">Logged in as</div><div style="font-size:12px;color:#94a3b8;margin-top:1px">${user.name} · ${user.email} · ${CREDS[role].role}</div></div><button class="btn bg" style="font-size:12px" onclick="logout()">Logout ⬅</button></div>
+    <div class="sr"><div><div style="font-weight:700;font-size:14px;color:var(--tx)">Reset all data</div><div style="font-size:12px;color:#94a3b8">Clear all absences, leaves & notifications</div></div><button class="btn bd" style="font-size:12px" onclick="if(confirm('Reset all data?')){absences=[];notifs=[];leaves=leaves.filter(l=>l.status==='approved');toast('Data reset','#e11d48');nav('settings')}">Reset</button></div>
+    <div class="sr"><div><div style="font-weight:700;font-size:14px;color:var(--tx)">Clear API Keys</div><div style="font-size:12px;color:#94a3b8">Remove all saved API keys (Groq & Gemini) from browser storage</div></div><button class="btn bg" style="font-size:12px" onclick="GROQ_KEY='';GEM_KEY='';localStorage.removeItem('eduai_groq_k');localStorage.removeItem('eduai_gemini_k');toast('API keys cleared','#64748b');nav('settings')">Clear Keys</button></div>
+  </div>
+  <div class="ssr">
+    <div class="st">ℹ️ About EduAI Pro v3</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px">
+      ${[['📊', 'Dashboard'], ['🟢', 'Availability'], ['👩‍🏫', 'Teachers'], ['🎓', 'Students'], ['🏖️', 'Leave Mgmt'], ['🔄', 'Substitutes'], ['📅', 'Timetable'], ['📈', 'Analytics'], ['📝', 'AI Reports'], ['🤖', 'AI Assistant'], ['🔔', 'Notifications'], ['⚙️', 'Settings']].map(([ic, n]) => `<div style="padding:10px 12px;background:#f8fafc;border-radius:10px;border:1px solid var(--gb);font-size:12px;font-weight:700;color:var(--tx)">${ic} ${n}</div>`).join('')}
+    </div>
+    <div style="margin-top:12px;font-size:12px;color:#94a3b8;line-height:1.7">Powered by Groq AI & Google Gemini (dual-fallback) · Built for modern school management · v3.0</div>
+  </div>`;
+    }
+    async function skSave() {
+      const v = document.getElementById('skIn')?.value?.trim();
+      if (!v || v.length < 20) { toast('⚠️ Invalid key format', '#e11d48'); return; }
+      if (v.startsWith('gsk-') || v.startsWith('gsk_')) { GROQ_KEY = v; localStorage.setItem('eduai_groq_k', v); }
+      else if (v.startsWith('AIzaSy')) { GEM_KEY = v; localStorage.setItem('eduai_gemini_k', v); }
+      else { toast('⚠️ Key must start with gsk (Groq) or AIzaSy (Gemini)', '#e11d48'); return; }
+      AKEY = v;
+      document.getElementById('apiBanner').classList.add('hidden');
+      toast('✅ API Key saved! AI enabled.', '#059669');
+      await persist('config', { ...cfg, groq: GROQ_KEY, gemini: GEM_KEY });
+      nav('settings');
+    }
+    async function togCfg(k) {
+      cfg[k] = !cfg[k];
+      toast(`${k} ${cfg[k] ? 'on' : 'off'}`, cfg[k] ? '#059669' : '#64748b');
+      await persist('config', cfg);
+      nav('settings');
+    }
+
+    // ───── USER MANAGEMENT ─────
+    async function changeOwnPassword() {
+      const old = document.getElementById('cpOld')?.value?.trim();
+      const pwd = document.getElementById('cpNew')?.value?.trim();
+      const conf = document.getElementById('cpConf')?.value?.trim();
+      if (!old || !pwd || !conf) { toast('⚠️ Fill all password fields', '#e11d48'); return; }
+      if (pwd !== conf) { toast('⚠️ Passwords do not match', '#e11d48'); return; }
+      if (pwd.length < 4) { toast('⚠️ Password too short (min 4 chars)', '#e11d48'); return; }
+      const userList = USERS[role] || [];
+      const currentUser = userList.find(u => u.u === user.username);
+      if (!currentUser || currentUser.p !== old) { toast('❌ Current password incorrect', '#e11d48'); return; }
+      currentUser.p = pwd;
+      await persist('users', USERS); // persisting the entire users object for now as it's the schema
+      toast('✅ Password changed successfully!', '#059669');
+      document.getElementById('cpOld').value = '';
+      document.getElementById('cpNew').value = '';
+      document.getElementById('cpConf').value = '';
+      nav('settings');
+    }
+
+    async function createUser(userRole) {
+      const uField = userRole === 'coordinator' ? 'ncU' : 'ntU';
+      const pField = userRole === 'coordinator' ? 'ncP' : 'ntP';
+      const nField = userRole === 'coordinator' ? 'ncN' : 'ntN';
+      let u = document.getElementById(uField)?.value?.trim();
+      let p = document.getElementById(pField)?.value?.trim();
+      const n = document.getElementById(nField)?.value?.trim();
+      if (!n) { toast('⚠️ Name required', '#e11d48'); return; }
+
+      // Auto-generate if empty
+      if (!u || !p) {
+        const parts = n.split(' ');
+        const titles = ['Dr.', 'Mr.', 'Ms.', 'Mrs.', 'Prof.'];
+        const first = (titles.includes(parts[0]) && parts.length > 1 ? parts[1] : parts[0]).toLowerCase().replace(/[^a-z]/g, '');
+        if (!u) u = first;
+        if (!p) p = first + '123';
+      }
+
+      const exists = USERS[userRole] && USERS[userRole].find(x => x.u === u);
+      if (exists) { toast('⚠️ Username already exists', '#e11d48'); return; }
+      const newUser = { u, p, name: n, role: userRole === 'coordinator' ? 'Academic Coordinator' : 'Class Teacher', email: u + '@school.edu', type: userRole, id: Date.now() };
+      if (!USERS[userRole]) USERS[userRole] = [];
+      USERS[userRole].push(newUser);
+      await persist('users', USERS);
+      toast(`✅ Created: ${u} / ${p}`, '#059669');
+      document.getElementById(uField).value = '';
+      document.getElementById(pField).value = '';
+      document.getElementById(nField).value = '';
+      updateUserList();
+    }
+
+    function updateUserList() {
+      const sel = document.getElementById('resetUser');
+      const role = document.getElementById('resetUserRole')?.value || 'coordinator';
+      if (!sel) return;
+      sel.innerHTML = '<option value="">Select user...</option>';
+      const users = USERS[role] || [];
+      users.forEach(u => { const opt = document.createElement('option'); opt.value = u.u; opt.textContent = u.name + ' (' + u.u + ')'; sel.appendChild(opt); });
+    }
+
+    async function resetUserPassword() {
+      const role = document.getElementById('resetUserRole')?.value || 'coordinator';
+      const username = document.getElementById('resetUser')?.value;
+      const newPass = document.getElementById('resetPass')?.value?.trim();
+      if (!username || !newPass) { toast('⚠️ Select user and enter new password', '#e11d48'); return; }
+      if (newPass.length < 4) { toast('⚠️ Password too short (min 4 chars)', '#e11d48'); return; }
+      const userList = USERS[role] || [];
+      const targetUser = userList.find(u => u.u === username);
+      if (!targetUser) { toast('⚠️ User not found', '#e11d48'); return; }
+      targetUser.p = newPass;
+      await persist('users', USERS);
+      toast(`✅ Password for ${targetUser.name} reset!`, '#059669');
+      document.getElementById('resetPass').value = '';
+      document.getElementById('resetUser').value = '';
+      updateUserList();
+      nav('settings');
+    }
+
+    // ───── DARK MODE ─────
+    let darkMode = false;
+    function toggleDark() {
+      darkMode = !darkMode;
+      document.body.classList.toggle('dark', darkMode);
+      cfg.dark = darkMode;
+      toast(darkMode ? '🌙 Dark mode on' : '☀️ Light mode on', '#4f46e5');
+    }
+
+    // Student data is now loaded from MongoDB
+    const LTYPES = ['Medical', 'Casual', 'Earned', 'Personal', 'Emergency'];
+    const LSTATUS = { pending: { bg: '#fef3c7', c: '#92400e', l: 'Pending' }, approved: { bg: '#dcfce7', c: '#15803d', l: 'Approved' }, rejected: { bg: '#fee2e2', c: '#991b1b', l: 'Rejected' } };
+
+    // ───── STUDENTS MODULE ─────
+    let stuView = 'grid', stuCls = 'All', stuSearch = '';
+    function rStudents(el) {
+      const cls = ['All', ...new Set(students.map(s => s.cls))];
+      const fl = students.filter(s => {
+        const matchCls = stuCls === 'All' || s.cls === stuCls;
+        const q = stuSearch.toLowerCase();
+        const matchQ = !q || s.name.toLowerCase().includes(q) || s.cls.toLowerCase().includes(q) || s.parent.toLowerCase().includes(q);
+        return matchCls && matchQ;
+      });
+      const avgAtt = Math.round(fl.reduce((a, s) => a + s.attendance, 0) / Math.max(fl.length, 1));
+      const lowAtt = fl.filter(s => s.attendance < 80).length;
+      el.innerHTML = `
+  <div class="fb" style="margin-bottom:18px">
+    <div><div class="stitle">🎓 Student Management</div><div class="ssub">${students.length} total students · ${avgAtt}% avg attendance · ${lowAtt} below 80% threshold</div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div style="position:relative;min-width:180px"><span style="position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none">🔍</span><input id="stuQ" class="fi2" placeholder="Search name, class..." value="${stuSearch}" oninput="stuSearch=this.value;nav('students')" style="padding-left:34px;width:100%"/></div>
+      ${role === 'admin' ? `<button class="btn bp" onclick="addStudentPrompt()">➕ Add Student</button>` : ''}
+    </div>
+  </div>
+
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
+    ${cls.map(c => `<button onclick="stuCls='${c}';nav('students')" style="padding:6px 16px;border-radius:99px;border:2px solid ${stuCls === c ? '#7c3aed' : 'var(--gb)'};background:${stuCls === c ? '#7c3aed' : 'white'};color:${stuCls === c ? 'white' : '#64748b'};font-weight:700;font-size:12px;cursor:pointer;transition:all .2s">${c === 'All' ? 'All Classes' : c} ${c === 'All' ? '(' + students.length + ')' : '(' + students.filter(s => s.cls === c).length + ')'}</button>`).join('')}
+    <div style="margin-left:auto;display:flex;gap:6px">
+      <button onclick="stuView='grid';nav('students')" style="padding:7px 12px;border-radius:8px;border:2px solid ${stuView === 'grid' ? '#7c3aed' : 'var(--gb)'};background:${stuView === 'grid' ? '#7c3aed' : 'white'};color:${stuView === 'grid' ? 'white' : '#64748b'};font-size:14px;cursor:pointer">▦</button>
+      <button onclick="stuView='table';nav('students')" style="padding:7px 12px;border-radius:8px;border:2px solid ${stuView === 'table' ? '#7c3aed' : 'var(--gb)'};background:${stuView === 'table' ? '#7c3aed' : 'white'};color:${stuView === 'table' ? 'white' : '#64748b'};font-size:14px;cursor:pointer">≡</button>
+    </div>
+  </div>
+
+  <div class="stat-grid" style="margin-bottom:18px">
+    ${[['🎓', students.length, 'Total Students', 'Enrolled', '#7c3aed'], ['✅', students.filter(s => s.attendance >= 90).length, 'Excellent Attendance', '≥90%', '#059669'], ['⚠️', lowAtt, 'Low Attendance', 'Below 80%', '#e11d48'], ['📊', avgAtt + '%', 'Avg Attendance', 'Class average', '#0891b2']].map(([ic, v, l, s, c]) => `<div class="scard" style="border-top-color:${c}"><div style="font-size:24px;margin-bottom:6px">${ic}</div><div style="font-size:30px;font-weight:900;color:${c};line-height:1">${v}</div><div style="font-weight:800;color:var(--tx);font-size:13px;margin-top:5px">${l}</div><div style="color:#94a3b8;font-size:11px;margin-top:2px">${s}</div></div>`).join('')}
+  </div>
+
+  ${stuView === 'grid' ? `
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px">
+    ${fl.map(s => {
+        const avg = Math.round(Object.values(s.grades).reduce((a, b) => a + b, 0) / Object.values(s.grades).length);
+        const attc = s.attendance >= 90 ? '#059669' : s.attendance >= 80 ? '#d97706' : '#e11d48';
+        const grc = avg >= 85 ? '#059669' : avg >= 70 ? '#d97706' : '#e11d48';
+        return `<div style="background:white;border-radius:16px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1.5px solid transparent;transition:all .22s;cursor:pointer" onclick="stuDetail(${s.id})" onmouseover="this.style.borderColor='rgba(124,58,237,.25)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='transparent';this.style.transform=''">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="avatar" style="width:44px;height:44px;font-size:15px;background:${avbg(s.name)}">${ini(s.name)}</div>
+            <div>
+              <div style="font-weight:800;color:var(--tx);font-size:14px">${s.name}</div>
+              <div style="color:#94a3b8;font-size:11px;margin-top:1px">Class ${s.cls} · Roll #${s.roll} · ${s.gender === 'M' ? '♂️' : '♀️'}</div>
+            </div>
+          </div>
+          <span style="padding:3px 9px;border-radius:99px;font-size:10px;font-weight:800;background:#ede9fe;color:#7c3aed">Avg ${avg}%</span>
+        </div>
+        <div style="font-size:11px;color:#94a3b8;margin-bottom:10px">👨‍👩‍👦 ${s.parent} &nbsp;·&nbsp; 📱 ${s.phone}</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:11px;color:#64748b;font-weight:600">Attendance</span>
+          <span style="font-size:12px;font-weight:800;color:${attc}">${s.attendance}% ${s.attendance < 80 ? '⚠️' : s.attendance >= 95 ? '🌟' : ''}</span>
+        </div>
+        <div class="prog" style="margin-bottom:10px"><div class="pf" style="width:${s.attendance}%;background:${attc}"></div></div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap">
+          ${Object.entries(s.grades).slice(0, 4).map(([sub, g]) => `<span style="padding:3px 8px;border-radius:6px;font-size:10px;font-weight:700;background:${g >= 85 ? '#f0fdf4' : g >= 70 ? '#fffbeb' : '#fff1f2'};color:${g >= 85 ? '#15803d' : g >= 70 ? '#92400e' : '#991b1b'}">${sub.slice(0, 3)}: ${g}</span>`).join('')}
+        </div>
+      </div>`;
+      }).join('')}
+    ${fl.length === 0 ? '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#94a3b8">No students found.</div>' : ''}
+  </div>`:
+          `<div class="card" style="padding:0;overflow:hidden"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;min-width:700px">
+    <thead><tr style="background:linear-gradient(135deg,#1e1b4b,#3730a3)">
+      ${['Name', 'Class', 'Parent', 'Attendance', 'Avg Grade', 'Status'].map(h => `<th style="padding:12px 14px;color:white;font-weight:800;font-size:12px;text-align:left">${h}</th>`).join('')}
+    </tr></thead>
+    <tbody>${fl.map((s, i) => {
+            const avg = Math.round(Object.values(s.grades).reduce((a, b) => a + b, 0) / Object.values(s.grades).length);
+            const attc = s.attendance >= 90 ? '#059669' : s.attendance >= 80 ? '#d97706' : '#e11d48';
+            return `<tr style="background:${i % 2 === 0 ? 'white' : '#fafbff'};cursor:pointer" onclick="stuDetail(${s.id})">
+        <td style="padding:11px 14px"><div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="width:32px;height:32px;font-size:11px;background:${avbg(s.name)}">${ini(s.name)}</div><div style="font-weight:700;color:var(--tx)">${s.name}</div></div></td>
+        <td style="padding:11px 14px;color:#64748b;font-size:13px">${s.cls}</td>
+        <td style="padding:11px 14px;color:#64748b;font-size:12px">${s.parent}</td>
+        <td style="padding:11px 14px"><span style="font-weight:800;color:${attc}">${s.attendance}%</span></td>
+        <td style="padding:11px 14px"><span style="font-weight:800;color:${avg >= 85 ? '#059669' : avg >= 70 ? '#d97706' : '#e11d48'}">${avg}%</span></td>
+        <td style="padding:11px 14px"><span style="padding:3px 9px;border-radius:99px;font-size:10px;font-weight:800;background:#dcfce7;color:#15803d">Active</span></td>
+      </tr>`;
+          }).join('')}</tbody>
+  </table></div></div>`}`;
+    }
+
+    function stuDetail(id) {
+      const s = students.find(x => x.id === id); if (!s) return;
+      const avg = Math.round(Object.values(s.grades).reduce((a, b) => a + b, 0) / Object.values(s.grades).length);
+      const attc = s.attendance >= 90 ? '#059669' : s.attendance >= 80 ? '#d97706' : '#e11d48';
+      const ov = document.createElement('div');
+      ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s';
+      ov.innerHTML = `<div style="background:white;border-radius:22px;padding:28px;width:100%;max-width:520px;box-shadow:0 24px 60px rgba(0,0,0,.2);animation:scaleIn .25s cubic-bezier(.34,1.56,.64,1);overflow-y:auto;max-height:90vh">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div class="avatar" style="width:56px;height:56px;font-size:20px;background:${avbg(s.name)};box-shadow:0 4px 16px ${avbg(s.name)}44">${ini(s.name)}</div>
+        <div><div style="font-weight:900;font-size:18px;color:var(--tx)">${s.name}</div><div style="color:#94a3b8;font-size:12px;margin-top:3px">Class ${s.cls} · Roll #${s.roll} · ${s.gender === 'M' ? 'Male' : 'Female'}</div></div>
+      </div>
+      <button onclick="this.closest('[style*=fixed]').remove()" style="border:none;background:#f1f5f9;border-radius:8px;padding:7px 11px;font-size:16px;cursor:pointer;color:#64748b">✕</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
+      ${[['📱', s.phone], ['📧', s.email], ['👨‍👩‍👦', s.parent], ['🏫', 'Class ' + s.cls]].map(([ic, v]) => `<div style="padding:10px 12px;background:#f8fafc;border-radius:10px;border:1px solid var(--gb)"><div style="font-size:18px;margin-bottom:3px">${ic}</div><div style="font-size:12px;color:#64748b">${v}</div></div>`).join('')}
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px">
+      <div style="padding:16px;background:${attc}12;border-radius:12px;border:1px solid ${attc}30;text-align:center">
+        <div style="font-size:32px;font-weight:900;color:${attc}">${s.attendance}%</div>
+        <div style="font-size:12px;color:#64748b;font-weight:600;margin-top:2px">Attendance</div>
+        ${s.attendance < 80 ? '<div style="font-size:10px;color:#e11d48;font-weight:700;margin-top:3px">⚠️ Below threshold</div>' : ''}
+      </div>
+      <div style="padding:16px;background:#7c3aed12;border-radius:12px;border:1px solid #7c3aed30;text-align:center">
+        <div style="font-size:32px;font-weight:900;color:#7c3aed">${avg}%</div>
+        <div style="font-size:12px;color:#64748b;font-weight:600;margin-top:2px">Average Grade</div>
+        <div style="font-size:10px;color:${avg >= 85 ? '#059669' : avg >= 70 ? '#d97706' : '#e11d48'};font-weight:700;margin-top:3px">${avg >= 85 ? '🌟 Excellent' : avg >= 70 ? '👍 Good' : '📈 Needs Improvement'}</div>
+      </div>
+    </div>
+    <div style="font-weight:800;color:var(--tx);margin-bottom:10px;font-size:14px">📚 Subject-wise Grades</div>
+    ${Object.entries(s.grades).map(([sub, g]) => { const gc = g >= 85 ? '#059669' : g >= 70 ? '#d97706' : '#e11d48'; return `<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="font-size:13px;font-weight:700;color:var(--tx)">${sub}</span><span style="font-size:13px;font-weight:800;color:${gc}">${g}/100</span></div><div class="prog"><div class="pf" style="width:${g}%;background:${gc}"></div></div></div>`; }).join('')}
+    <button onclick="this.closest('[style*=fixed]').remove()" class="btn bp" style="width:100%;margin-top:18px">Close</button>
+  </div>`;
+      ov.onclick = e => { if (e.target === ov) ov.remove(); };
+      document.body.appendChild(ov);
+    }
+
+    function addStudentPrompt() {
+      const ov = document.createElement('div');
+      ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s';
+      ov.innerHTML = `<div style="background:white;border-radius:22px;padding:28px;width:100%;max-width:500px;box-shadow:0 24px 60px rgba(0,0,0,.2);animation:scaleIn .25s cubic-bezier(.34,1.56,.64,1)">
+    <div style="font-weight:900;font-size:18px;color:var(--tx);margin-bottom:4px">➕ Add New Student</div>
+    <div style="color:#94a3b8;font-size:13px;margin-bottom:18px">Enter student details below</div>
+    <div class="fg" style="margin-bottom:16px">
+      ${[['snN', 'Full Name', 'Aarav Sharma', 'text'], ['snC', 'Class', '10-A', 'text'], ['snR', 'Roll No.', '1', 'number'], ['snPar', 'Parent Name', 'Ramesh Sharma', 'text'], ['snPh', 'Parent Phone', '+91-98765-00000', 'text'], ['snEm', 'Parent Email', 'parent@gmail.com', 'email']].map(([id, l, ph, tp]) => `<div><label class="fl">${l}</label><input id="${id}" class="fi2" placeholder="${ph}" type="${tp}"/></div>`).join('')}
+    </div>
+    <div style="font-weight:800;font-size:13px;color:var(--tx);margin-bottom:10px">Initial Grades (0-100)</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+      ${['Math', 'English', 'Science', 'History', 'CS'].map(sub => `<div><label class="fl">${sub.substring(0, 4)}</label><input id="sg_${sub}" class="fi2" style="padding:8px" placeholder="0" type="number" min="0" max="100"/></div>`).join('')}
+    </div>
+    <div style="display:flex;gap:8px;margin-top:20px">
+      <button class="btn bp" onclick="doAddStudent(this)" style="flex:1">💾 Save Student</button>
+      <button class="btn bg" onclick="this.closest('[style*=fixed]').remove()">Cancel</button>
+    </div>
+  </div>`;
+      ov.onclick = e => { if (e.target === ov) ov.remove(); };
+      document.body.appendChild(ov);
+    }
+
+    async function doAddStudent(btn) {
+      const name = document.getElementById('snN')?.value?.trim();
+      const cls = document.getElementById('snC')?.value?.trim();
+      if (!name || !cls) { toast('⚠️ Name and Class required', '#e11d48'); return; }
+
+      const grades = {
+        Math: parseInt(document.getElementById('sg_Math')?.value) || 0,
+        English: parseInt(document.getElementById('sg_English')?.value) || 0,
+        Science: parseInt(document.getElementById('sg_Science')?.value) || 0,
+        History: parseInt(document.getElementById('sg_History')?.value) || 0,
+        CS: parseInt(document.getElementById('sg_CS')?.value) || 0
+      };
+
+      const newItem = { id: Date.now(), name, cls, roll: parseInt(document.getElementById('snR')?.value) || students.length + 1, gender: 'M', parent: document.getElementById('snPar')?.value || '', phone: document.getElementById('snPh')?.value || '', email: document.getElementById('snEm')?.value || '', attendance: 100, grades, status: 'active' };
+      students.push(newItem);
+      btn.closest('[style*=fixed]').remove();
+      toast('✅ Student added!', '#059669');
+      await persist('students', newItem);
+      nav('students');
+    }
+
+    // ───── LEAVE MANAGEMENT ─────
+    function rLeaves(el) {
+      const pend = leaves.filter(l => l.status === 'pending').length;
+      el.innerHTML = `
+  <div style="margin-bottom:18px">
+    <div class="stitle">🏖️ Leave Management</div>
+    <div class="ssub">Manage teacher leave requests · ${pend} pending approval</div>
+  </div>
+  <div class="stat-grid" style="margin-bottom:18px">
+    ${[['📋', leaves.length, 'Total Requests', 'This month', '#7c3aed'], ['⏳', pend, 'Pending', 'Awaiting approval', '#d97706'], ['✅', leaves.filter(l => l.status === 'approved').length, 'Approved', 'Granted leaves', '#059669'], ['❌', leaves.filter(l => l.status === 'rejected').length, 'Rejected', 'Declined requests', '#e11d48']].map(([ic, v, l, s, c]) => `<div class="scard" style="border-top-color:${c}"><div style="font-size:24px;margin-bottom:6px">${ic}</div><div style="font-size:30px;font-weight:900;color:${c};line-height:1">${v}</div><div style="font-weight:800;color:var(--tx);font-size:13px;margin-top:5px">${l}</div><div style="color:#94a3b8;font-size:11px;margin-top:2px">${s}</div></div>`).join('')}
+  </div>
+
+  ${role === 'admin' || role === 'coordinator' ? `
+  <div class="card" style="margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <div class="ct" style="margin:0">➕ Apply for Leave (on behalf of teacher)</div>
+      ${role === 'admin' ? `
+      <div style="display:flex;align-items:center;gap:8px;padding:6px 12px;background:${cfg.lvLocked ? '#fff1f2' : '#f0fdf4'};border-radius:10px;border:1.5px solid ${cfg.lvLocked ? '#fecdd3' : '#bbf7d0'}">
+        <span style="font-size:14px">${cfg.lvLocked ? '🔒' : '🔓'}</span>
+        <span style="font-size:11px;font-weight:700;color:${cfg.lvLocked ? '#e11d48' : '#059669'}">${cfg.lvLocked ? 'Approval Locked' : 'Coordinators Active'}</span>
+        <button class="btn ${cfg.lvLocked ? 'bs' : 'bd'}" style="font-size:10px;padding:3px 8px" onclick="togCfg('lvLocked')">${cfg.lvLocked ? 'Unlock' : 'Lock'}</button>
+      </div>` : ''}
+    </div>
+    <div class="fg">
+      <div style="grid-column:1/2"><label class="fl">Teacher</label><select id="lvT" class="fi2"><option value="">Select...</option>${teachers.map(t => `<option value="${t.id}">${t.name}</option>`).join('')}</select></div>
+      <div style="grid-column:2/-1"><label class="fl">Leave Mode</label><select id="lvMode" class="fi2" onchange="const p=document.getElementById('lvPGrpA'), t=document.getElementById('lvToGrpA'); if(this.value==='Period'){p.style.display='block';t.style.display='none';}else{p.style.display='none';t.style.display='block';}"><option value="Full Day">Full Day / Multi-Day</option><option value="Period">Specific Periods</option></select></div>
+      <div><label class="fl">Leave Type</label><select id="lvTp" class="fi2">${LTYPES.map(t => `<option>${t}</option>`).join('')}</select></div>
+      <div><label class="fl">From Date / Date</label><input id="lvF" type="date" class="fi2" value="2026-03-17"/></div>
+      <div id="lvToGrpA"><label class="fl">To Date</label><input id="lvTo" type="date" class="fi2" value="2026-03-17"/></div>
+      <div id="lvPGrpA" style="display:none"><label class="fl">Periods (e.g. 1, 2)</label><input id="lvP" type="text" class="fi2" placeholder="e.g. 1, 3"/></div>
+      <div style="grid-column:1/-1"><label class="fl">Reason</label><input id="lvR" class="fi2" placeholder="Brief reason for leave..."/></div>
+    </div>
+    <button class="btn bp" style="margin-top:12px" onclick="applyLeave()">📋 Submit Leave Request</button>
+  </div>`:
+          `<div class="card" style="margin-bottom:18px">
+    <div class="ct">✍️ Request Leave</div>
+    <div class="fg">
+      <div style="grid-column:1/2"><label class="fl">Leave Mode</label><select id="lvMode" class="fi2" onchange="const p=document.getElementById('lvPGrp'), t=document.getElementById('lvToGrp'); if(this.value==='Period'){p.style.display='block';t.style.display='none';}else{p.style.display='none';t.style.display='block';}"><option value="Full Day">Full Day / Multi-Day</option><option value="Period">Specific Periods</option></select></div>
+      <div style="grid-column:2/-1"><label class="fl">Leave Type</label><select id="lvTp" class="fi2">${LTYPES.map(t => `<option>${t}</option>`).join('')}</select></div>
+      <div><label class="fl">From Date / Date</label><input id="lvF" type="date" class="fi2" value="2026-03-17"/></div>
+      <div id="lvToGrp"><label class="fl">To Date</label><input id="lvTo" type="date" class="fi2" value="2026-03-17"/></div>
+      <div id="lvPGrp" style="display:none"><label class="fl">Periods (e.g. 1, 2)</label><input id="lvP" type="text" class="fi2" placeholder="e.g. 1, 3"/></div>
+      <div style="grid-column:1/-1"><label class="fl">Reason</label><input id="lvR" class="fi2" placeholder="Why do you need leave?"/></div>
+    </div>
+    <button class="btn bp" style="margin-top:12px;width:100%" onclick="applyLeave()">📤 Submit Request to Admin</button>
+  </div>`}
+
+  <div style="font-weight:800;font-size:15px;color:var(--tx);margin-bottom:12px">📋 All Leave Requests</div>
+  ${leaves.map(l => {
+            const st = LSTATUS[l.status];
+            const tc = teachers.find(t => t.id === l.teacherId);
+            return `<div style="background:white;border-radius:14px;padding:16px 18px;box-shadow:0 2px 10px rgba(0,0,0,.06);border-left:5px solid ${l.status === 'pending' ? '#d97706' : l.status === 'approved' ? '#059669' : '#e11d48'};margin-bottom:12px;transition:box-shadow .2s" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow='0 2px 10px rgba(0,0,0,.06)'">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="avatar" style="width:42px;height:42px;font-size:14px;background:${avbg(l.teacher)}">${ini(l.teacher)}</div>
+          <div>
+            <div style="font-weight:900;font-size:15px;color:var(--tx)">${l.teacher}</div>
+            <div style="color:#64748b;font-size:12px;margin-top:2px">📅 ${l.from} → ${l.to} &nbsp;·&nbsp; ${l.days.toString().includes('Periods') ? l.days : l.days + ' day(s)'} &nbsp;·&nbsp; <span style="background:#e0f2fe;color:#0891b2;padding:1px 8px;border-radius:99px;font-size:10px;font-weight:800">${l.type}</span></div>
+            <div style="color:#94a3b8;font-size:12px;margin-top:3px">💬 "${l.reason}"</div>
+            ${l.approvedBy ? `<div style="color:#059669;font-size:11px;font-weight:700;margin-top:3px">✓ Approved by ${l.approvedBy}</div>` : ''}
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="padding:5px 14px;border-radius:99px;font-size:11px;font-weight:800;background:${st.bg};color:${st.c}">${st.l}</span>
+          ${(role === 'admin' || (role === 'coordinator' && !cfg.lvLocked)) && l.status === 'pending' ? `
+          <button class="btn bs" style="font-size:11px;padding:6px 14px" onclick="actLeave(${l.id},'approved')">✅ Approve</button>
+          <button class="btn bd" style="font-size:11px;padding:6px 14px" onclick="actLeave(${l.id},'rejected')">❌ Reject</button>` :
+                (role === 'admin' || (role === 'coordinator' && !cfg.lvLocked)) && l.status !== 'pending' ? `<button class="btn bg" style="font-size:11px;padding:6px 12px" onclick="actLeave(${l.id},'pending')">↩ Reopen</button>` :
+                  (role === 'coordinator' && cfg.lvLocked && l.status === 'pending') ? `<span title="Only Admin can approve today" style="cursor:help;font-size:11px;color:#94a3b8;font-style:italic">🔒 Locked by Admin</span>` : ''}
+        </div>
+      </div>
+    </div>`;
+          }).join('')}
+  ${leaves.length === 0 ? '<div style="text-align:center;padding:40px;color:#94a3b8">No leave requests yet.</div>' : ''}`;
+    }
+
+    async function autoAssignMultiPeriods(aid, periodsToCover) {
+      let ab = absences.find(a => a.id === aid); if (!ab) return;
+
+      let assignedMap = {};
+      let updatedTimetable = false;
+
+      const dayMapping = { '2026-03-17': 'Tuesday', '2026-03-18': 'Wednesday', '2026-03-19': 'Thursday', '2026-03-20': 'Friday', '2026-03-21': 'Saturday' };
+      const dayName = dayMapping[ab.date] || 'Tuesday';
+
+      for (let ptc of periodsToCover) {
+        const ttRow = TT[dayName] ? TT[dayName].find(r => r.p === ptc.period) : null;
+
+        let avl = teachers.filter(t => {
+          if (t.avail !== 'available' || t.id === ab.teacherId) return false;
+          if (absences.some(a => a.teacherId === t.id && a.date === ab.date && a.period !== 'All' && !a.subsAssigned)) return false;
+          if (ttRow) {
+            for (let c of ALL_CLASSES) {
+              if (ttRow[c] && (ttRow[c].tc === t.name || ttRow[c].tc === t.name + '(s)')) return false;
+            }
+          }
+          return true;
+        });
+
+        if (avl.length > 0) {
+          avl.sort((a, b) => {
+            const aSubMatch = a.subjects.includes(ptc.subject) ? 1 : 0;
+            const bSubMatch = b.subjects.includes(ptc.subject) ? 1 : 0;
+            if (aSubMatch !== bSubMatch) return bSubMatch - aSubMatch;
+            if (a.workload !== b.workload) return a.workload - b.workload;
+            if (a.exp !== b.exp) return b.exp - a.exp;
+            return b.rating - a.rating;
+          });
+
+          const best = avl[0];
+          assignedMap[ptc.period] = best.name.split(' ').slice(-1)[0]; // Just last name or whatever is short
+
+          // Update workload temporary
+          teachers = teachers.map(t => t.id === best.id ? { ...t, workload: Math.min(10, t.workload + 1) } : t);
+
+          // Update Timetable
+          if (ttRow && ttRow[ptc.cls] && (ttRow[ptc.cls].tc === ab.teacher || ttRow[ptc.cls].tc === ab.teacher + '(s)')) {
+            ttRow[ptc.cls] = { s: ptc.subject, tc: best.name + '(s)' };
+            updatedTimetable = true;
+          }
+          notifs.unshift({ id: Date.now() + Math.random(), msg: `🤖 @${best.name}: Substitute assigned for ${ab.teacher} in Period ${ptc.period} (${ptc.cls})`, type: 'success', time: 'Just now', read: false });
+        } else {
+          assignedMap[ptc.period] = "Unassigned";
+        }
+      }
+
+      if (updatedTimetable) await persist('TT', TT);
+
+      ab.subsAssigned = assignedMap;
+      ab.status = 'assigned'; // Flip status so it's not stuck in 'pending/Processing'
+
+      absences = absences.map(a => a.id === aid ? ab : a);
+      await persist('absences', ab);
+
+      // We don't overwrite the whole teachers array to DB here unless we want to, wait, yes, we can.
+      await persist('teachers', teachers[0]); // Hack to trigger save without full array logic if available, wait, no, persist ignores array index if it's the whole array
+
+      const covCount = Object.values(assignedMap).filter(v => v !== 'Unassigned').length;
+      const n = { id: Date.now(), msg: `✅ AI automatically covered ${covCount}/${periodsToCover.length} periods for ${ab.teacher}.`, type: 'success', time: 'Just now', read: false };
+      notifs.unshift(n); await persist('notifications', n);
+      toast(`✅ AI covered ${covCount} periods`, '#059669');
+
+      drawAbsList();
+      updDot();
+      if (tab === 'substitutes') renderNav();
+    }
+
+    // ───── AI AUTO-SUBSTITUTE SYSTEM ─────
+    async function autoAssignSubstitute(aid) {
+      const ab = absences.find(a => a.id === aid); if (!ab) return;
+
+      const dayMapping = { '2026-03-17': 'Tuesday', '2026-03-18': 'Wednesday', '2026-03-19': 'Thursday', '2026-03-20': 'Friday', '2026-03-21': 'Saturday' };
+      const dayName = dayMapping[ab.date] || 'Tuesday';
+      const ttRow = TT[dayName] ? TT[dayName].find(r => r.p === ab.period) : null;
+
+      const avl = teachers.filter(t => {
+        if (t.avail !== 'available' || t.id === ab.teacherId) return false;
+        if (absences.some(a => a.teacherId === t.id && a.date === ab.date)) return false;
+        if (ttRow) {
+          for (let c of ALL_CLASSES) {
+            if (ttRow[c] && (ttRow[c].tc === t.name || ttRow[c].tc === t.name + '(s)')) return false;
+          }
+        }
+        return true;
+      });
+
+      if (avl.length === 0) {
+        absences = absences.map(a => a.id === aid ? { ...a, aiLoad: false, aiSug: { teacherName: 'No available substitutes', reason: 'All teachers are busy or on leave. System will retry later.', confidence: 'Low', teacherId: null } } : a);
+        drawAbsList();
+        return;
+      }
+
+      absences = absences.map(a => a.id === aid ? { ...a, aiLoad: true, aiSug: null } : a);
+      drawAbsList();
+
+      try {
+        const pr = 'TASK: AUTOMATICALLY find and recommend the BEST substitute teacher (ONLY respond with JSON, no markdown)\n\nABSENCE DETAILS:\n- Absent Teacher: ' + ab.teacher + '\n- Subject: ' + ab.subject + '\n- Class: ' + ab.cls + '\n- Period: ' + ab.period + '\n- Date: ' + ab.date + '\n\nAVAILABLE TEACHERS FOR SUBSTITUTION:\n' + avl.map(t => 'ID:' + t.id + ' | ' + t.name + ' | Subjects: [' + t.subjects.join(', ') + '] | Workload: ' + t.workload + '/10 | Experience: ' + t.exp + ' years | Rating: ' + t.rating + ' | Status: ' + t.avail).join('\n') + '\n\nSELECTION CRITERIA (PRIORITY ORDER):\n1. Subject match (must teach the same subject)\n2. Lowest workload (≤7/10 preferred)\n3. Highest experience\n4. Highest rating\n5. Already available\n\nRESPOND ONLY with this JSON (no markdown, no code blocks):\n{"teacherId":<id>,"teacherName":"<name>","reason":"<concise 1-sentence reason>","confidence":"High","autoSelected":true}';
+        const d = await claude([{ role: 'user', content: pr }], null, 500, false);
+        const textContent = extractJSON(d.content?.[0]?.text || '{}');
+        const r = JSON.parse(textContent);
+        if (r.teacherId) {
+          await assignSub(aid, r.teacherId);
+        } else {
+          absences = absences.map(a => a.id === aid ? { ...a, aiLoad: false, aiSug: { teacherName: 'No suitable teacher found', reason: r.reason || 'AI could not confidently assign a teacher. Please review manually.', confidence: 'Low', teacherId: null } } : a);
+          drawAbsList();
+        }
+      } catch (e) {
+        absences = absences.map(a => a.id === aid ? { ...a, aiLoad: false, aiSug: { teacherName: 'System Error', reason: 'Assignment failed due to an error: ' + e.message, confidence: 'Error', teacherId: null } } : a);
+        drawAbsList();
+        console.log('Auto-assign error:', e.message);
+      }
+    }
+
+    async function applyLeave() {
+      const tid = role === 'teacher' ? user.id : document.getElementById('lvT')?.value;
+      const reason = document.getElementById('lvR')?.value?.trim();
+      const mode = document.getElementById('lvMode')?.value || 'Full Day';
+      if (!tid || !reason) { toast('⚠️ Please enter a reason', '#e11d48'); return; }
+
+      const t = teachers.find(x => x.id === parseInt(tid));
+      const from = document.getElementById('lvF')?.value;
+      let to, d;
+
+      if (mode === 'Period') {
+        to = from;
+        d = 'Periods ' + document.getElementById('lvP')?.value;
+      } else {
+        to = document.getElementById('lvTo')?.value || from;
+        d = Math.max(1, Math.round((new Date(to) - new Date(from)) / (86400000)) + 1);
+      }
+
+      const newItem = { id: Date.now(), teacherId: parseInt(tid), teacher: t?.name || '', type: document.getElementById('lvTp')?.value || 'Casual', from, to, days: d, reason, status: 'pending', approvedBy: null, applied: new Date().toISOString().slice(0, 10) };
+      leaves.unshift(newItem);
+      const n = { id: Date.now(), msg: `Leave request: ${t?.name} — ${d} day(s) from ${from}`, type: 'alert', time: 'Just now', read: false };
+      notifs.unshift(n);
+      toast('Leave request submitted', '#d97706');
+      await persist('leaves', newItem);
+      await persist('notifications', n);
+      updDot(); renderNav(); nav('leaves');
+    }
+
+    async function actLeave(id, status) {
+      leaves = leaves.map(l => l.id === id ? { ...l, status, approvedBy: status === 'approved' ? user.name : null } : l);
+      const l = leaves.find(x => x.id === id);
+      if (status === 'approved') {
+        const isPeriodMode = l.days.toString().includes('Periods');
+        teachers = teachers.map(t => t.id === l.teacherId ? { ...t, avail: isPeriodMode ? 'available' : 'on-leave' } : t);
+        const tc = teachers.find(t => t.id === l.teacherId);
+
+        // 1. Analyze the timetable to find exactly WHICH classes the teacher has
+        const dateStr = l.from;
+        const dayMapping = { '2026-03-17': 'Tuesday', '2026-03-18': 'Wednesday', '2026-03-19': 'Thursday', '2026-03-20': 'Friday', '2026-03-21': 'Saturday' };
+        const dayName = dayMapping[dateStr] || 'Tuesday';
+        const ttDay = TT[dayName] || [];
+
+        let periodsToCover = [];
+        if (isPeriodMode) {
+          const targeted = l.days.replace('Periods', '').split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x));
+          ttDay.forEach(r => {
+            if (targeted.includes(r.p)) {
+              for (let c of ALL_CLASSES) {
+                if (r[c] && (r[c].tc === l.teacher || r[c].tc === l.teacher + '(s)')) periodsToCover.push({ period: r.p, cls: c, subject: r[c].s });
+              }
+            }
+          });
+        } else {
+          ttDay.forEach(r => {
+            for (let c of ALL_CLASSES) {
+              if (r[c] && (r[c].tc === l.teacher || r[c].tc === l.teacher + '(s)')) periodsToCover.push({ period: r.p, cls: c, subject: r[c].s });
+            }
+          });
+        }
+
+        await persist('leaves', l);
+        await persist('teachers', tc);
+
+        if (periodsToCover.length === 0) {
+          const n = { id: Date.now(), msg: `✅ Leave approved: ${l.teacher} — No classes needed cover today`, type: 'success', time: 'Just now', read: false };
+          notifs.unshift(n); toast('Leave approved (No classes today)', '#059669');
+          await persist('notifications', n);
+        } else {
+          const absenceId = Date.now();
+          const abItem = { id: absenceId, teacherId: l.teacherId, teacher: l.teacher, date: l.from, subject: isPeriodMode ? 'Various' : 'Full Day', period: isPeriodMode ? l.days.replace('Periods', '').trim() : 'All', cls: 'Various', status: 'assigned', subId: null, subsAssigned: {}, aiLoad: false };
+          absences.unshift(abItem);
+
+          await autoAssignMultiPeriods(absenceId, periodsToCover);
+        }
+        updDot(); renderNav();
+      } else if (status === 'rejected') {
+        const n = { id: Date.now(), msg: `❌ Leave rejected: ${l.teacher}`, type: 'alert', time: 'Just now', read: false };
+        notifs.unshift(n);
+        toast('Leave rejected', '#e11d48');
+        await persist('leaves', l);
+        await persist('notifications', n);
+        updDot(); renderNav();
+      } else {
+        toast('Leave reopened', '#d97706');
+        await persist('leaves', l);
+        updDot(); renderNav();
+      }
+    }
+
+    // ───── AI REPORTS ─────
+    let reportOutput = '', reportLoading = false, reportType = 'Monthly Summary';
+    const RTYPES = ['Monthly Summary', 'Teacher Performance', 'Absence Analysis', 'Substitute Efficiency', 'Staffing Recommendations', 'Parent Communication Letter', 'Board Presentation Summary'];
+    function rReports(el) {
+      el.innerHTML = `
+  ${analysisResults ? `<div style="padding:14px 16px;background:linear-gradient(135deg,#f0fdf4,#dbeafe);border-radius:12px;border:1.5px solid #86efac;margin-bottom:16px;color:#15803d">
+    <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px"><span style="font-size:20px">🤖</span><div style="flex:1">
+      <div style="font-weight:800;font-size:13px">✅ Auto-Analysis Ready</div>
+      <div style="font-size:11px;color:#047857;margin-top:2px">Analyzed at ${analysisResults.timestamp} · AI has processed all school data</div>
+      </div><button class="btn bs" style="font-size:11px;padding:6px 12px;white-space:nowrap" onclick="document.getElementById('rOut').innerHTML=analysisResults.analysis.replace(/\\*\\*(.*?)\\*\\*/g,'<strong>$1</strong>').replace(/\\*(.*?)\\*/g,'<em>$1</em>').replace(/\\n/g,'<br>').replace(/#{1,3} (.+)/g,'<div style=\\"font-weight:900;font-size:16px;color:#7c3aed;margin:14px 0 6px\\">$1</div>');document.querySelectorAll('.rtype').forEach(b=>b.classList.remove('ractive'))">Show Results</button></div>
+  </div>`: ''}
+  <div style="margin-bottom:18px">
+    <div class="stitle">📝 AI Report Generator</div>
+    <div class="ssub">Generate professional school reports instantly using AI</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1.8fr;gap:18px;align-items:start">
+    <div>
+      <div class="card">
+        <div class="ct">📋 Report Configuration</div>
+        <label class="fl" style="margin-bottom:6px">Report Type</label>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+          ${RTYPES.map(r => `<button onclick="reportType='${r}';document.querySelectorAll('.rtype').forEach(b=>b.classList.remove('ractive'));this.classList.add('ractive');document.getElementById('rDesc').textContent=getRDesc('${r}')" class="rtype ${reportType === r ? 'ractive' : ''}" style="padding:9px 14px;border-radius:10px;border:2px solid ${reportType === r ? '#7c3aed' : 'var(--gb)'};background:${reportType === r ? '#7c3aed' : 'white'};color:${reportType === r ? 'white' : '#64748b'};font-weight:700;font-size:12px;text-align:left;cursor:pointer;transition:all .2s">${r}</button>`).join('')}
+        </div>
+        <div id="rDesc" style="font-size:12px;color:#94a3b8;padding:10px 12px;background:#f8fafc;border-radius:8px;line-height:1.7;margin-bottom:14px">${getRDesc(reportType)}</div>
+        <button class="btn bai" style="width:100%" onclick="genReport()" ${reportLoading ? 'disabled' : ''}>
+          ${reportLoading ? '🔄 Generating...' : '🤖 Generate AI Report'}
+        </button>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <div class="ct">📊 Data to Include</div>
+        <div style="font-size:12px;color:#64748b;line-height:1.9">
+          ✅ ${teachers.length} teachers · ${absences.length} absences<br>
+          ✅ ${students.length} students · ${leaves.length} leave requests<br>
+          ✅ 7-month historical trend data<br>
+          ✅ Current availability status<br>
+          ✅ Workload analysis per teacher<br>
+          ✅ Coverage rate & targets
+        </div>
+      </div>
+    </div>
+    <div class="card" style="min-height:400px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+        <div class="ct" style="margin:0">📄 Report Output</div>
+        ${reportOutput ? `<div style="display:flex;gap:7px"><button class="btn bg" style="font-size:12px" onclick="copyReport()">📋 Copy</button><button class="btn bp" style="font-size:12px" onclick="printReport()">🖨️ Print</button></div>` : ''}
+      </div>
+      ${reportLoading ? `<div style="text-align:center;padding:60px 20px"><div style="display:flex;justify-content:center;gap:8px;margin-bottom:18px"><div class="d1" style="width:10px;height:10px;border-radius:50%;background:#7c3aed"></div><div class="d2" style="width:10px;height:10px;border-radius:50%;background:#7c3aed"></div><div class="d3" style="width:10px;height:10px;border-radius:50%;background:#7c3aed"></div></div><div style="color:#94a3b8;font-size:14px;font-weight:600">Claude is generating your report...</div></div>` :
+          reportOutput ? `<div id="rOut" style="font-size:13px;line-height:1.85;color:var(--tx);white-space:pre-wrap;padding:4px">${reportOutput.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\n/g, '<br>').replace(/#{1,3} (.+)/g, '<div style="font-weight:900;font-size:16px;color:#7c3aed;margin:14px 0 6px">$1</div>')}</div>` :
+            `<div style="text-align:center;padding:60px 20px;color:#94a3b8"><div style="font-size:48px;margin-bottom:14px">📝</div><div style="font-size:14px;font-weight:600;margin-bottom:8px">No report generated yet</div><div style="font-size:12px">Select a report type and click "Generate AI Report"</div></div>`}
+    </div>
+  </div>`;
+    }
+    function getRDesc(r) { const d = { 'Monthly Summary': 'A comprehensive overview of school operations including absences, coverage rates, staffing, and key metrics for the month.', 'Teacher Performance': 'Individual teacher analysis covering attendance, workload, ratings, and performance trends with recommendations.', 'Absence Analysis': 'Deep dive into absence patterns, peak periods, departments most affected, and cost implications.', 'Substitute Efficiency': 'Analysis of how well the substitute system is working, best performers, response times, and improvements.', 'Staffing Recommendations': 'AI-powered hiring recommendations based on shortage analysis, department needs, and budget considerations.', 'Parent Communication Letter': 'Professional parent communication about school performance, upcoming events, and relevant updates.', 'Board Presentation Summary': 'Executive-level summary suitable for presenting to the school board or management committee.' }; return d[r] || 'Generate a detailed AI report on the selected topic.'; }
+    async function genReport() {
+      if (reportLoading) return;
+      reportLoading = true; reportOutput = ''; rReports(document.querySelector('#content .fu'));
+      const ctx = `SCHOOL DATA:\n- Teachers: ${teachers.length} total, ${teachers.filter(t => t.avail === 'available').length} available, ${teachers.filter(t => t.avail === 'on-leave').length} on leave\n- Absences this month: ${absences.length} (${absences.filter(a => a.status === 'pending').length} pending, ${absences.filter(a => a.status === 'assigned').length} covered)\n- Students: ${students.length} enrolled, avg attendance ${Math.round(students.reduce((a, s) => a + s.attendance, 0) / students.length)}%\n- Leave requests: ${leaves.length} (${leaves.filter(l => l.status === 'pending').length} pending)\n- Coverage rate: 86% (target: ${cfg.target}%)\n- Monthly trend: Sep:92%, Oct:100%, Nov:87%, Dec:100%, Jan:89%, Feb:100%, Mar:86%\n\nTEACHER WORKLOAD:\n${teachers.map(t => t.name + ': ' + t.workload + '/10 (' + t.avail + ')').join(', ')}\n\nHIGH WORKLOAD TEACHERS: ${teachers.filter(t => t.workload >= 7).map(t => t.name + ' (' + t.workload + '/10)').join(', ') || 'None'}`;
+      const pr = `Generate a professional, detailed "${reportType}" report for EduAI Pro School Management System.\n\nDATA:\n${ctx}\n\nDate: Tuesday, March 17, 2026\n\nWrite a comprehensive, well-structured report with:\n- Clear section headers (use ## for headers)\n- **Bold** key findings\n- Specific numbers and percentages\n- Actionable recommendations\n- Professional tone suitable for school administration\n\nMake it thorough (400-600 words) and genuinely useful for school decision-making.`;
+      try {
+        const d = await claude([{ role: 'user', content: pr }], null, 1200);
+        reportOutput = d.content?.[0]?.text || 'Report generation failed.';
+      } catch (e) {
+        let m = 'Could not generate report. ';
+        if (e.message === 'NO_KEY') m += 'Please set your API key first.';
+        else if (e.message === 'BAD_KEY') m += 'Your API key is invalid.';
+        else m += e.message;
+        reportOutput = m;
+      }
+      reportLoading = false; rReports(document.querySelector('#content .fu'));
+    }
+    function copyReport() { navigator.clipboard.writeText(reportOutput.replace(/<[^>]+>/g, '')).then(() => toast('📋 Report copied!', '#059669')).catch(() => toast('Copy failed', '#e11d48')); }
+    function printReport() { const w = window.open('', '_blank'); w.document.write('<html><head><title>EduAI Pro Report</title><style>body{font-family:Arial,sans-serif;padding:40px;max-width:800px;margin:0 auto;color:#1e293b}h1,h2,h3{color:#7c3aed}strong{color:#1e293b}</style></head><body><h1>EduAI Pro — ' + reportType + '</h1><hr><div>' + document.getElementById('rOut')?.innerHTML || reportOutput + '</div></body></html>'); w.document.close(); w.print(); }
+
+    // ───── DARK MODE (real toggle) ─────
+    function applyDark(on) {
+      const style = document.getElementById('darkStyle') || document.createElement('style');
+      style.id = 'darkStyle';
+      style.textContent = on ? `
+    body{background:#0f172a}
+    #main{background:#0f172a}
+    #topbar{background:#1e293b!important;border-color:#334155!important}
+    #ttl,#tsub{color:#f1f5f9!important}
+    .card,.scard,.tcard,.acard,.ssr,.apanel,.avail-panel{background:#1e293b!important;box-shadow:0 2px 12px rgba(0,0,0,.3)!important}
+    .ct,.stitle{color:#f1f5f9!important}
+    .fi2,.form-input{background:#0f172a!important;color:#f1f5f9!important;border-color:#334155!important}
+    select.fi2,select.form-input{background:#0f172a!important;color:#f1f5f9!important}
+    .nb,.nb:hover:not(.on){color:#94a3b8!important}
+    #content{background:#0f172a!important}
+    .ssub{color:#64748b!important}
+    .btn.bg{background:#1e293b!important;color:#94a3b8!important;border-color:#334155!important}
+    table tbody tr{background:#1e293b!important}
+    table tbody tr:nth-child(even){background:#162032!important}
+    .ni{background:#1e293b!important}
+    .chat-area,[id="ca"]{background:#162032!important}
+    .msg.b .mbub,[class="mbub"]{background:#1e293b!important;color:#f1f5f9!important}
+    .apr:hover,.avail-row:hover{background:#162032!important}
+    .apr{border-bottom-color:#334155!important}
+  `: '';
+      if (!style.parentNode) document.head.appendChild(style);
+    }
+
+    // Pre-fill API input if saved
+    if (AKEY) { const ai = document.getElementById('apiIn'); if (ai) ai.value = AKEY; }
+
+    // Fetch initial data (including users for login) on load
+    loadData();
+
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>

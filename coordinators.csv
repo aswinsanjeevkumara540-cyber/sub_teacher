@@ -1,0 +1,40 @@
+coordinator_id,name,department,phone,email,experience
+C001,Ms. Anjali Desai,Science,987651111,anjali@school.edu,10
+C002,Mr. Ramesh Nambiar,Commerce,987651112,ramesh@school.edu,15
+C003,Ms. Meera Chopra,Arts,987651113,meera@school.edu,7
+C004,Mr. Suresh Patel,Physical Education,987651114,suresh@school.edu,12
+C005,Ms. Kavita Rao,Mathematics,987651115,kavita@school.edu,8
+C006,Mr. Arvind Kumar,Computer Science,987651116,arvind@school.edu,6
+C007,Ms. Priya Singh,Languages,987651117,priya@school.edu,9
+C008,Mr. Vijay Malhotra,Humanities,987651118,vijay@school.edu,11
+C009,Ms. Sunita Verma,Social Studies,987651119,sunita@school.edu,13
+C010,Mr. Anil Joshi,Music,987651120,anil@school.edu,5
+C011,Ms. Ritu Sharma,Art,987651121,ritu@school.edu,8
+C012,Mr. Deepak Mehta,Physical Education,987651122,deepak@school.edu,14
+C013,Ms. Neha Gupta,Science,987651123,neha@school.edu,6
+C014,Mr. Sandeep Rao,Commerce,987651124,sandeep@school.edu,10
+C015,Ms. Asha Menon,Arts,987651125,asha@school.edu,9
+C016,Mr. Rajesh Singh,Mathematics,987651126,rajesh@school.edu,11
+C017,Ms. Pooja Deshmukh,Computer Science,987651127,pooja@school.edu,7
+C018,Mr. Manoj Kumar,Languages,987651128,manoj@school.edu,8
+C019,Ms. Anu Verma,Humanities,987651129,anu@school.edu,10
+C020,Mr. Rakesh Sharma,Social Studies,987651130,rakesh@school.edu,12
+C021,Ms. Sushma Reddy,Music,987651131,sushma@school.edu,8
+C022,Mr. Ashish Gupta,Art,987651132,ashish@school.edu,6
+C023,Ms. Kavya Nair,Physical Education,987651133,kavya@school.edu,9
+C024,Mr. Prakash Singh,Science,987651134,prakash@school.edu,8
+C025,Ms. Anjali Mehta,Commerce,987651135,anjali.mehta@school.edu,10
+C026,Mr. Ramesh Kumar,Arts,987651136,ramesh.kumar@school.edu,15
+C027,Ms. Meera Singh,Mathematics,987651137,meera.singh@school.edu,7
+C028,Mr. Suresh Verma,Computer Science,987651138,suresh.verma@school.edu,12
+C029,Ms. Kavita Sharma,Languages,987651139,kavita.sharma@school.edu,8
+C030,Mr. Arvind Rao,Humanities,987651140,arvind.rao@school.edu,11
+C031,Ms. Priya Mehta,Social Studies,987651141,priya.mehta@school.edu,9
+C032,Mr. Vijay Singh,Music,987651142,vijay.singh@school.edu,5
+C033,Ms. Sunita Sharma,Art,987651143,sunita.sharma@school.edu,8
+C034,Mr. Anil Kumar,Physical Education,987651144,anil.kumar@school.edu,5
+C035,Ms. Ritu Verma,Science,987651145,ritu.verma@school.edu,8
+C036,Mr. Deepak Singh,Commerce,987651146,deepak.singh@school.edu,10
+C037,Ms. Neha Sharma,Arts,987651147,neha.sharma@school.edu,6
+C038,Mr. Sandeep Kumar,Mathematics,987651148,sandeep.kumar@school.edu,10
+
